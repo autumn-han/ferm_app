@@ -1,4 +1,4 @@
-import User from "../models/user.model";
+const User = require("../models/user.model");
 
 module.exports.newUser = (req, res) => {
   User.create(req.body)

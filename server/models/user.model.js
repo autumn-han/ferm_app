@@ -26,6 +26,7 @@ const UserSchema = new mongoose.Schema(
           type: Date,
         },
         status: {
+          type: String,
           enum: ["Primary", "Secondary", "Conditioning", "Complete"],
           default: "Primary",
         },
