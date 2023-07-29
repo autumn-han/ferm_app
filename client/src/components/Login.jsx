@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
     const [ user, setUser ] = useState({});
+    const navigate = useNavigate();
     const createUser = (newUser) => {
         axios.post('http://localhost:8000/api/users', newUser)
             .then((res) => {
@@ -14,6 +16,7 @@ const Login = () => {
     const registerHandler = (e) => {
         e.preventDefault();
         createUser({ userName, passWord });
+        navigate(`fermentation-journal/user/${user._id}`);
     };
     return (
         <div>

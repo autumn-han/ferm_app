@@ -5,3 +5,9 @@ module.exports.newUser = (req, res) => {
     .then((newUser) => res.json(newUser))
     .catch((err) => res.json(err));
 };
+
+module.exports.getUser = (req, res) => {
+  User.findOne({ _id: req.params.id })
+    .then((user) => res.json(user))
+    .catch((err) => res.json(err));
+};
