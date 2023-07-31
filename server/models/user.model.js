@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -59,6 +60,13 @@ UserSchema.pre("validate", function (next) {
     this.invalidate("confirmPassword", "passwords must match");
   }
   next();
+});
+
+UserSchema.pre("save", function (next) {
+  bcrypt.hash(this.password, 10).then((hash) => {
+    this.password = hash;
+    next();
+  });
 });
 
 module.exports = mongoose.model("User", UserSchema);
