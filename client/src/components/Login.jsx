@@ -49,7 +49,11 @@ const Login = () => {
                         </div>
                         <div>
                             <label>password:</label>
-                            <input type='text' />
+                            <input value='password' type='text' />
+                        </div>
+                        <div>
+                            <label>confirm password:</label>
+                            <input value='confirmPassword' type='text' />
                         </div>
                         <button>Register</button>
                     </form>

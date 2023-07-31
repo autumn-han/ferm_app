@@ -4,15 +4,15 @@ const UserSchema = new mongoose.Schema(
   {
     userName: {
       type: String,
-      required: true,
-      minLength: 6,
-      maxLength: 20,
+      required: [true, "username is required"],
+      minLength: [6, "username must be at least 6 characters"],
+      maxLength: [20, "username cannot be longer than 20 characters"],
     },
     passWord: {
       type: String,
-      required: true,
-      minLength: 8,
-      maxLength: 20,
+      required: [true, "password is required"],
+      minLength: [8, "password must be at least 8 characters"],
+      maxLength: [20, "password cannot be longer than 20 characters"],
     },
     projects: [
       {
@@ -49,5 +49,16 @@ const UserSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+UserSchema.virtual("confirmPassword")
+  .get(() => this._confirmPassword)
+  .set((value) => (this._confirmPassword = value));
+
+UserSchema.pre("validate", function (next) {
+  if (this.password !== this.confirmPassword) {
+    this.invalidate("confirmPassword", "passwords must match");
+  }
+  next();
+});
 
 module.exports = mongoose.model("User", UserSchema);
