@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+// might not need to import jwt here?
 const jwt = require("jsonwebtoken");
 const app = express();
 const port = 8000;
