@@ -1,12 +1,15 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 const app = express();
 const port = 8000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(cors());
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 
 require("dotenv").config();
 
