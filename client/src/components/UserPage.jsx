@@ -4,14 +4,14 @@ import axios from 'axios';
 
 const UserPage = () => {
     const [ user, setUser ] = useState([]);
-    // useEffect(() => {
-    //     axios.get('http://localhost:8000/api/users/' + userID)
-    //         .then((res) => {
-    //             console.log(res.data);
-    //             setUser(res.data);
-    //         })
-    //         .catch((err) => console.log('Unable to process GET request'));
-    // });
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/user/' + userID)
+            .then((res) => {
+                console.log(res.data);
+                setUser(res.data);
+            })
+            .catch((err) => console.log('Unable to process GET request'));
+    });
     const onSubmitHandler = (e) => {
         e.preventDefault();
         // add in function that adds new project to the DOM to show in the list

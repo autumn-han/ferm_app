@@ -4,19 +4,35 @@ import axios from 'axios';
 
 const Login = () => {
     const [ user, setUser ] = useState({});
+    const [ userName, setUserName ] = useState("");
+    const [ passWord, setPassWord ] = useState("");
+    const [ confirmPassword, setConfirmPassword ] = useState("");
     const navigate = useNavigate();
-    const createUser = (newUser) => {
-        axios.post('http://localhost:8000/api/users', newUser)
+    const registerUser = (newUser) => {
+        axios.post('http://localhost:8000/api/user/register', newUser, { withCredentials: true })
             .then((res) => {
                 console.log(res.data);
                 setUser(res.data);
             })
-            .catch((err) => console.log('Unable to process POST request'));
+            .catch((err) => console.log('Unable to process POST request for registration'));
+    };
+    const loginUser = (currentUser) => {
+        axios.post('http://localhost:8000/api/user/login', currentUser, { withCredentials: true })
+            .then((res) => {
+                console.log(res.data);
+                setUser(res.data);
+            })
+            .catch((err) => console.log('Unable to process POST request for logging in'));
     };
     const registerHandler = (e) => {
         e.preventDefault();
-        createUser({ userName, passWord });
-        navigate(`fermentation-journal/user/${user._id}`);
+        registerUser({ userName, passWord });
+        navigate('/');
+    };
+    const loginHandler = (e) => {
+        e.preventDefault();
+        loginUser({ userName, passWord });
+        navigate(`/fermentation-journal/user/${user._id}`);
     };
     return (
         <div>
@@ -26,7 +42,7 @@ const Login = () => {
             <div>
                 <div>
                     <h2>Already a Brewer?</h2>
-                    <form>
+                    <form onSubmit={loginHandler}>
                         <h3>Login Here:</h3>
                         <div>
                             <label>username:</label>
@@ -45,15 +61,15 @@ const Login = () => {
                         <h3>Sign Up Here:</h3>
                         <div>
                             <label>username:</label>
-                            <input type='text' />
+                            <input value={userName} type='text' onChange={(e) => setUserName(e.target.value)} />
                         </div>
                         <div>
                             <label>password:</label>
-                            <input value='password' type='text' />
+                            <input value={passWord} type='password' onChange={(e) => setPassWord(e.target.value)} />
                         </div>
                         <div>
                             <label>confirm password:</label>
-                            <input value='confirmPassword' type='text' />
+                            <input value={confirmPassword} type='password' onChange={(e) => setConfirmPassword(e.target.value)} />
                         </div>
                         <button>Register</button>
                     </form>
@@ -64,3 +80,6 @@ const Login = () => {
 };
 
 export default Login;
+
+// error with trying to register a user -> seems to be an issue with CORS and authorization
+// to prompt the exact error, try registering a new user

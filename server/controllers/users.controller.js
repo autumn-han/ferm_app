@@ -24,8 +24,8 @@ module.exports.login = async (req, res) => {
     return res.sendStatus(400);
   }
   const correctPassword = await bcrypt.compare(
-    req.body.password,
-    user.password
+    req.body.passWord,
+    user.passWord
   );
   if (!correctPassword) {
     return res.sendStatus(400);
@@ -36,4 +36,15 @@ module.exports.login = async (req, res) => {
     },
     process.env.SECOND_SECRET_KEY
   );
+  res
+    .cookie("userToken", userToken, {
+      httpOnly: true,
+    })
+    .json({ msg: "successful login" });
+};
+
+module.exports.getUser = (req, res) => {
+  User.findOne({ _id: req.body.id })
+    .then((user) => res.json(user))
+    .catch((err) => res.json(err));
 };

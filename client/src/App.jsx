@@ -11,8 +11,8 @@ function App() {
         <Routes>
           <Route element={<Navigate to='/fermentation-journal/login' />} path='/' />
           <Route element={<Login />} path='/fermentation-journal/login' />
-          <Route element={<UserPage />} path='/fermentation-journal/user' />
-          <Route element={<ProjectPage />} path='/fermentation-journal/user/projects' />
+          <Route element={<UserPage />} path='/fermentation-journal/user/:id' />
+          <Route element={<ProjectPage />} path='/fermentation-journal/user/:id/projects' />
         </Routes>
       </BrowserRouter>
     </div>
