@@ -7,7 +7,7 @@ const Login = () => {
     const [ userName, setUserName ] = useState("");
     const [ passWord, setPassWord ] = useState("");
     const [ errors, setErrors ] = useState([]);
-    const [ confirmPassword, setConfirmPassword ] = useState("");
+    // const [ confirmPassword, setConfirmPassword ] = useState("");
     const navigate = useNavigate();
     const registerUser = (newUser) => {
         axios.post('http://localhost:8000/api/user/register', newUser)
@@ -23,34 +23,34 @@ const Login = () => {
                     errorArr.push(errorResponse[key].message);
                 }
                 setErrors(errorArr);
-            })
-    };
-    const loginUser = (currentUser) => {
-        axios.post('http://localhost:8000/api/user/login', currentUser)
-            .then((res) => {
-                console.log(res.data);
-                setUser(res.data);
-            })
-            .catch((err) => {
-                console.log("Unable to process POST request for logging in");
-                const errorResponse = err.response.data.errors;
-                const errorArr = [];
-                for (const key of Object.keys(errorResponse)) {
-                    errorArr.push(errorResponse[key].message);
-                }
-                setErrors(errorArr);
             });
     };
+    // const loginUser = (currentUser) => {
+    //     axios.post('http://localhost:8000/api/user/login', currentUser)
+    //         .then((res) => {
+    //             console.log(res.data);
+    //             setUser(res.data);
+    //         })
+    //         .catch((err) => {
+    //             console.log("Unable to process POST request for logging in");
+    //             const errorResponse = err.response.data.errors;
+    //             const errorArr = [];
+    //             for (const key of Object.keys(errorResponse)) {
+    //                 errorArr.push(errorResponse[key].message);
+    //             }
+    //             setErrors(errorArr);
+    //         });
+    // };
     const registerHandler = (e) => {
         e.preventDefault();
         registerUser({ userName, passWord });
         navigate('/');
     };
-    const loginHandler = (e) => {
-        e.preventDefault();
-        loginUser({ userName, passWord });
-        navigate(`/fermentation-journal/user/${user._id}`);
-    };
+    // const loginHandler = (e) => {
+    //     e.preventDefault();
+    //     loginUser({ userName, passWord });
+    //     navigate(`/fermentation-journal/user/${user._id}`);
+    // };
     return (
         <div>
             <div>
@@ -59,12 +59,7 @@ const Login = () => {
             <div>
                 <div>
                     <h2>Already a Brewer?</h2>
-                    <form onSubmit={loginHandler}>
-                        {errors.map((err, index) => {
-                            return (
-                                <p key={index}>{err}</p>
-                            )
-                        })}
+                    <form>
                         <h3>Login Here:</h3>
                         <div>
                             <label>username:</label>
@@ -80,11 +75,10 @@ const Login = () => {
                 <div>
                     <h2>Ready to Start?</h2>
                     <form onSubmit={registerHandler}>
-                        {errors.map((err, index) => {
-                            return (
+                        {errors.map((err, index) => (
                                 <p key={index}>{err}</p>
                             )
-                        })}
+                        )}
                         <h3>Sign Up Here:</h3>
                         <div>
                             <label>username:</label>
@@ -94,10 +88,10 @@ const Login = () => {
                             <label>password:</label>
                             <input value={passWord} type='password' onChange={(e) => setPassWord(e.target.value)} />
                         </div>
-                        <div>
+                        {/* <div>
                             <label>confirm password:</label>
                             <input value={confirmPassword} type='password' onChange={(e) => setConfirmPassword(e.target.value)} />
-                        </div>
+                        </div> */}
                         <button>Register</button>
                     </form>
                 </div>
