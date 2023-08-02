@@ -15,7 +15,7 @@ module.exports.register = (req, res) => {
         })
         .json({ message: "successful registration", user: newUser });
     })
-    .catch((err) => res.json(err));
+    .catch((err) => res.status(400).json(err));
 };
 
 module.exports.login = async (req, res) => {

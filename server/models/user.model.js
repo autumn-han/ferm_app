@@ -51,22 +51,23 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-UserSchema.virtual("confirmPassword")
-  .get(() => this._confirmPassword)
-  .set((value) => (this._confirmPassword = value));
+// figure out where this code block should go
+// UserSchema.virtual("confirmPassword")
+//   .get(() => this._confirmPassword)
+//   .set((value) => (this._confirmPassword = value));
 
-UserSchema.pre("validate", function (next) {
-  if (this.password !== this.confirmPassword) {
-    this.invalidate("confirmPassword", "passwords must match");
-  }
-  next();
-});
+// UserSchema.pre("validate", function (next) {
+//   if (this.password !== this.confirmPassword) {
+//     this.invalidate("confirmPassword", "passwords must match");
+//   }
+//   next();
+// });
 
-UserSchema.pre("save", function (next) {
-  bcrypt.hash(this.password, 10).then((hash) => {
-    this.password = hash;
-    next();
-  });
-});
+// UserSchema.pre("save", function (next) {
+//   bcrypt.hash(this.password, 10).then((hash) => {
+//     this.password = hash;
+//     next();
+//   });
+// });
 
 module.exports = mongoose.model("User", UserSchema);
