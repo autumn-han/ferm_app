@@ -1,5 +1,5 @@
 const User = require("../models/user.model");
-const bcryptjs = require("bycryptjs");
+const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 
