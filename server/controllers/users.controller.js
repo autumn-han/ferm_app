@@ -7,7 +7,7 @@ module.exports.register = (req, res) => {
 };
 
 module.exports.update = (req, res) => {
-  User.findOneAndUpdate({ _id: req.params.id })
+  User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then((updatedUser) => res.json(updatedUser))
     .catch((err) => res.json(err));
 };
