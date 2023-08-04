@@ -44,7 +44,7 @@ const Login = () => {
     const registerHandler = (e) => {
         e.preventDefault();
         registerUser({ userName, passWord });
-        navigate('/');
+        navigate('/user-dashboard');
     };
     // const loginHandler = (e) => {
     //     e.preventDefault();

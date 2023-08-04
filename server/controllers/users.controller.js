@@ -6,6 +6,12 @@ module.exports.register = (req, res) => {
     .catch((err) => res.status(400).json(err));
 };
 
+module.exports.getUser = (req, res) => {
+  User.findOne({ _id: req.params.id })
+    .then((user) => res.json(user))
+    .catch((err) => res.json(err));
+};
+
 module.exports.update = (req, res) => {
   User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
     .then((updatedUser) => res.json(updatedUser))
@@ -37,9 +43,3 @@ module.exports.update = (req, res) => {
 //     })
 //     .json({ msg: "successful login" });
 // };
-
-module.exports.getUser = (req, res) => {
-  User.findOne({ _id: req.params.id })
-    .then((user) => res.json(user))
-    .catch((err) => res.json(err));
-};

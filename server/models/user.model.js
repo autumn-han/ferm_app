@@ -1,18 +1,17 @@
 const mongoose = require("mongoose");
+const bcryptjs = require("bcryptjs");
 
 const UserSchema = new mongoose.Schema(
   {
     userName: {
       type: String,
-      required: [true, "username is required"],
-      minLength: [6, "username must be at least 6 characters"],
-      maxLength: [20, "username cannot be longer than 20 characters"],
+      required: [true, "Username is required"],
+      minLength: [6, "Username must be at least 6 characters"],
     },
     passWord: {
       type: String,
-      required: [true, "password is required"],
-      minLength: [8, "password must be at least 8 characters"],
-      maxLength: [20, "password cannot be longer than 20 characters"],
+      required: [true, "Password is required"],
+      minLength: [8, "Password must be at least 8 characters"],
     },
     projects: [
       {
@@ -41,7 +40,7 @@ const UserSchema = new mongoose.Schema(
             entryText: {
               type: String,
             },
-            // picUpload: GridFS (API) or storing directly into document if 16MB or less
+            // picUpload: GridFS (API)
           },
         ],
       },
@@ -50,23 +49,27 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// figure out where this code block should go
-// UserSchema.virtual("confirmPassword")
-//   .get(() => this._confirmPassword)
-//   .set((value) => (this._confirmPassword = value));
+// gets and sets the confirmedPassword value
+UserSchema.virtual("confirmPassword")
+  .get(() => this._confirmPassword)
+  .set((value) => (this._confirmPassword = value));
 
-// UserSchema.pre("validate", function (next) {
-//   if (this.password !== this.confirmPassword) {
-//     this.invalidate("confirmPassword", "passwords must match");
-//   }
-//   next();
-// });
+// checks the confirmedPassword value against the password field
+UserSchema.pre("validate", function (next) {
+  if (this.passWord !== this.confirmPassword) {
+    this.invalidate(
+      "confirmPassword",
+      "Password must match confirmed password field"
+    );
+  }
+});
 
-// UserSchema.pre("save", function (next) {
-//   bcrypt.hash(this.password, 10).then((hash) => {
-//     this.password = hash;
-//     next();
-//   });
-// });
+// if password matches confirmPassword value, value will be saved in the database
+UserSchema.pre("save", function (next) {
+  bcryptjs.hash(this.passWord, 10).then((hash) => {
+    this.passWord = hash;
+    next();
+  });
+});
 
 module.exports = mongoose.model("User", UserSchema);

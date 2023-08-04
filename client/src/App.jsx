@@ -9,10 +9,10 @@ function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route element={<Navigate to='/fermentation-journal/login' />} path='/' />
-          <Route element={<Login />} path='/fermentation-journal/login' />
-          <Route element={<UserPage />} path='/fermentation-journal/user/:id' />
-          <Route element={<ProjectPage />} path='/fermentation-journal/user/:id/projects' />
+          <Route element={<Navigate to='/login' />} path='/' />
+          <Route element={<Login />} path='/login' />
+          <Route element={<UserPage />} path='/user-dashboard' />
+          <Route element={<ProjectPage />} path='/project-dashboard' />
         </Routes>
       </BrowserRouter>
     </div>
