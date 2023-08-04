@@ -62,6 +62,7 @@ UserSchema.pre("validate", function (next) {
       "Password must match confirmed password field"
     );
   }
+  next();
 });
 
 // if password matches confirmPassword value, value will be saved in the database
