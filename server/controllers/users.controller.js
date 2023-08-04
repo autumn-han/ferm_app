@@ -3,7 +3,7 @@ const User = require("../models/user.model");
 module.exports.register = (req, res) => {
   User.create(req.body)
     .then((newUser) => res.json(newUser))
-    .catch((err) => res.json(err));
+    .catch((err) => res.status(400).json(err));
 };
 
 // ----> LOGIN METHOD <-----

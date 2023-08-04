@@ -102,5 +102,4 @@ const Login = () => {
 
 export default Login;
 
-// error with trying to register a user -> seems to be an issue with CORS and authorization
-// to prompt the exact error, try registering a new user
+// error messages are not getting displayed - try retyping this out?
