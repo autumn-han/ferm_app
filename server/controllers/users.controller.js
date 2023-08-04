@@ -6,6 +6,12 @@ module.exports.register = (req, res) => {
     .catch((err) => res.status(400).json(err));
 };
 
+module.exports.update = (req, res) => {
+  User.findOneAndUpdate({ _id: req.params.id })
+    .then((updatedUser) => res.json(updatedUser))
+    .catch((err) => res.json(err));
+};
+
 // ----> LOGIN METHOD <-----
 // module.exports.login = async (req, res) => {
 //   const user = await User.findOne({ userName: req.body.userName });
@@ -33,7 +39,7 @@ module.exports.register = (req, res) => {
 // };
 
 module.exports.getUser = (req, res) => {
-  User.findOne({ _id: req.body.id })
+  User.findOne({ _id: req.params.id })
     .then((user) => res.json(user))
     .catch((err) => res.json(err));
 };
