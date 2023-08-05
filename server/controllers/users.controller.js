@@ -65,18 +65,24 @@ module.exports = {
     }
   },
   // LOGOUT USER
-  logout: async (req, res) => {
+  logout: (req, res) => {
     res.clearCookie("userToken");
     res.sendStatus(200);
   },
+  // GET ALL USERS
+  getAllUsers: (req, res) => {
+    User.find({})
+      .then((users) => res.json(users))
+      .catch((err) => res.json(err));
+  },
   // GET ONE USER
-  getUser: async (req, res) => {
+  getUser: (req, res) => {
     User.findOne({ _id: req.params.id })
       .then((user) => res.json(user))
       .catch((err) => res.json(err));
   },
   // UPDATE USER
-  update: async (req, res) => {
+  update: (req, res) => {
     User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       .then((updatedUser) => res.json(updatedUser))
       .catch((err) => res.json(err));
