@@ -49,12 +49,12 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// gets and sets the confirmedPassword value
+// getting and setting the confirmedPassword value
 UserSchema.virtual("confirmPassword")
   .get(() => this._confirmPassword)
   .set((value) => (this._confirmPassword = value));
 
-// checks the confirmedPassword value against the password field
+// checking the confirmedPassword value against the password field
 UserSchema.pre("validate", function (next) {
   if (this.passWord !== this.confirmPassword) {
     this.invalidate(
