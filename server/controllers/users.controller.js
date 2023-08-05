@@ -39,14 +39,14 @@ module.exports = {
       // check if userName matches a userName in the database
       const user = await User.findOne({ userName: req.body.userName });
       if (user === null) {
-        return res.status(400).json({ msg: "Invalid login attempt" });
+        return res.status(400).json({ msg: "Username not found" });
       }
       const correctPassword = await bcryptjs.compare(
         req.body.passWord,
         user.passWord
       );
       if (!correctPassword) {
-        return res.status(400).json({ msg: "Invalid login attempt" });
+        return res.status(400).json({ msg: "Incorrect password" });
       } else {
         const userToken = jwt.sign(
           {
