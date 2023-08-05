@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const LoginForm = () => {
+const LoginForm = (props) => {
+    const { errMessage, onSubmitProp } = props;
+    const [ userName, setUsername ] = useState("");
+    const [ passWord, setPassword ] = useState("");
+    const submitHandler = (e) => {
+        e.preventDefault();
+        onSubmitProp({ userName, passWord });
+    };
     return (
         <div>
-            <form>
-                <h2>Already A Brewer?</h2>
+            <h2>Already A Brewer?</h2>
+            <form onSubmit={submitHandler}>
                 <div>
-                    <label>Username: </label>
-                    <input type="text" />
+                    <p>{errMessage}</p>
                 </div>
                 <div>
-                    <label>Password: </label>
-                    <input type="password" />
+                    <label htmlFor="userName">Username: </label>
+                    <input type="text" name="userName" value={userName} onChange={(e) => setUsername(e.target.value)} />
+                </div>
+                <div>
+                    <label htmlFor="passWord">Password: </label>
+                    <input type="password" name="passWord" value={passWord} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <button>Login</button>
             </form>

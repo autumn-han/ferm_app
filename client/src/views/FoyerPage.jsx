@@ -6,12 +6,13 @@ import RegistrationForm from '../components/RegistrationForm';
 
 const FoyerPage = () => {
     const [ errors, setErrors ] = useState([]);
+    const [ errMessage, setErrMessage ] = useState("");
     const navigate = useNavigate();
     const registerUser = (userParam) => {
         axios.post('http://localhost:8000/api/user/register', userParam, { withCredentials: true })
             .then((newUser) => {
                 console.log(newUser);
-                navigate('/');
+                navigate('/dashboard');
             })
             .catch((err) => {
                 console.log("Unable to process POST registration request");
@@ -22,7 +23,19 @@ const FoyerPage = () => {
                 }
                 setErrors(errorArr);
             });
-    }
+    };
+    const loginUser = (userParam) => {
+        axios.post('http://localhost:8000/api/user/login', userParam, { withCredentials: true })
+            .then((user) => {
+                console.log(user);
+                navigate('/dashboard');
+            })
+            .catch((err) => {
+                console.log("Unable to process POST login request");
+                setErrMessage(err.response.data.msg);
+                console.log(errMessage);
+            });
+    };
     return (
         <div>
             <div>
@@ -30,7 +43,7 @@ const FoyerPage = () => {
             </div>
             <div>
                 <div>
-                    <LoginForm />
+                    <LoginForm errMessage={errMessage} onSubmitProp={loginUser} />
                 </div>
                 <div>
                     <RegistrationForm errors={errors} onSubmitProp={registerUser} />
