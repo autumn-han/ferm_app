@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import axios from 'axios';
 import ProjectList from '../components/ProjectList';
+import { userContext } from '../context/UserContext';
 
 const UserPage = () => {
-    const [ user, setUser ] = useState({});
+    const { user, setUser } = useContext(userContext);
     // useEffect(() => {
-    //     axios.get('http://localhost:8000/api/user/' + userToken._id, { withCredentials: true })
+    //     axios.get('http://localhost:8000/api/user/' + user._id, { withCredentials: true })
     //         .then((user) => {
     //             console.log(user.data);
     //             setUser(user);
@@ -16,7 +17,7 @@ const UserPage = () => {
     // });
     return (
         <div>
-            <ProjectList />
+            <ProjectList user={user} />
         </div>
     )
 };

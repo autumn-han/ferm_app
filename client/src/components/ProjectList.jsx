@@ -1,10 +1,11 @@
 import React from 'react';
 
-const ProjectList = () => {
+const ProjectList = (props) => {
+    const { user } = props;
     return (
         <div>
             <div>
-                <h1>Welcome Back, </h1>
+                <h1>Welcome Back, {user.userName}</h1>
             </div>
             <div>
                 <div>

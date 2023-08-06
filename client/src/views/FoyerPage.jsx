@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { userContext } from '../context/UserContext';
 import LoginForm from '../components/LoginForm';
 import RegistrationForm from '../components/RegistrationForm';
 
 const FoyerPage = () => {
+    const { user, setUser } = useContext(userContext);
     const [ errors, setErrors ] = useState([]);
     const [ errMessage, setErrMessage ] = useState("");
     const navigate = useNavigate();
     const registerUser = (userParam) => {
         axios.post('http://localhost:8000/api/user/register', userParam, { withCredentials: true })
             .then((newUser) => {
-                console.log(newUser);
+                console.log(newUser.data);
+                setUser(newUser.data);
                 navigate('/dashboard');
             })
             .catch((err) => {
@@ -27,7 +30,8 @@ const FoyerPage = () => {
     const loginUser = (userParam) => {
         axios.post('http://localhost:8000/api/user/login', userParam, { withCredentials: true })
             .then((user) => {
-                console.log(user);
+                console.log(user.data);
+                setUser(user.data);
                 navigate('/dashboard');
             })
             .catch((err) => {
