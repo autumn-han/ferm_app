@@ -1,18 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { userContext } from '../context/UserContext';
 
-const ProjectList = (props) => {
-    const { user } = props;
+const ProjectList = () => {
+    const { user } = useContext(userContext);
     return (
         <div>
             <div>
-                <h1>Welcome Back, {user.userName}</h1>
+                <h1>{`Welcome, ${user.userName}`}</h1>
             </div>
             <div>
                 <div>
                     <h2>What's Brewing...</h2>
                     <table>
                         <tbody>
-                            {/* filter through user projects into <tr> and <td> */}
+                            {user.projects.map((project, index) => (
+                                <td key={index}>Project Title: {project.title}</td>
+                            ))}
                         </tbody>
                     </table>
                 </div>

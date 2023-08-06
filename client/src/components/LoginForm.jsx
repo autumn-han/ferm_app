@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { userContext } from '../context/UserContext';
 
 const LoginForm = (props) => {
     const { errMessage, onSubmitProp } = props;
+    const { setUser } = useContext(userContext);
     const [ userName, setUsername ] = useState("");
     const [ passWord, setPassword ] = useState("");
     const submitHandler = (e) => {
         e.preventDefault();
-        onSubmitProp({ userName, passWord });
+        const oldUser = { userName, passWord };
+        onSubmitProp(oldUser);
+        setUser(oldUser);
     };
     return (
         <div>
