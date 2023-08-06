@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { userContext } from './context/UserContext';
 import { UserProvider } from './context/UserContext';
 import FoyerPage from './views/FoyerPage';
 import UserPage from './views/UserPage';

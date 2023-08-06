@@ -13,9 +13,7 @@ const ProjectList = () => {
                     <h2>What's Brewing...</h2>
                     <table>
                         <tbody>
-                            {user.projects.map((project, index) => (
-                                <td key={index}>Project Title: {project.title}</td>
-                            ))}
+                            {}
                         </tbody>
                     </table>
                 </div>
