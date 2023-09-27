@@ -12,28 +12,28 @@ const ProjectForm = (props) => {
     const submitHandler = (e) => {
         e.preventDefault();
         onSubmitProp({
-            // how to set embedded attributes to formData? 
+            // how to set embedded attributes to formData?
         });
     };
     return (
         <div>
             <h2>Start a New Project</h2>
-                <form>
+                <form onSubmit={submitHandler}>
                     <div>
-                        <label htmlFor="title">Title: </label>
+                        <label for="title">Title: </label>
                         <input type='text' name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
                     </div>
                     <div>
-                        <label>Start-Date: </label>
-                        <input type='date' />
+                        <label for="startDate">Start-Date: </label>
+                        <input type='date' name="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                     </div>
                     <div>
-                        <label>End-Date: </label>
-                        <input type='date' />
+                        <label for="endDate">End-Date: </label>
+                        <input type='date' name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                     </div>
                     <div>
-                        <label>Status: </label>
-                        <select>
+                        <label for="status">Status: </label>
+                        <select name="status" onChange={(e) => setStatus(e.target.value)} >
                             <option value='Primary'>Primary</option>
                             <option value='Secondary'>Secondary</option>
                             <option value='Aging'>Aging</option>
@@ -41,8 +41,8 @@ const ProjectForm = (props) => {
                         </select>
                     </div>
                     <div>
-                        <label>Description: </label>
-                        <input type='textarea' />
+                        <label for="desc">Description: </label>
+                        <input type='textarea' name="desc" value={desc} onChange={(e) => setDesc(e.target.value)} />
                     </div>
                     <div>
                         {/* <label>Upload Photo: </label>

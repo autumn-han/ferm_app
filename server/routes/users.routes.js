@@ -9,3 +9,5 @@ module.exports = (app) => {
   // app.get("/api/user/:id", authenticate, UserController.getUser);
   app.patch("/api/user/:id", UserController.update);
 };
+
+// note: when testing in Postman, take 'authenticate' out of the getAllUsers request to make it easier

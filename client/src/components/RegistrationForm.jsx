@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { userContext } from '../context/UserContext';
 
 const RegistrationForm = (props) => {
-    const { errors, onSubmitProp } = props;
+    const { errMessage, errors, onSubmitProp } = props;
     const { setUser } = useContext(userContext);
     const [ userName, setUsername ] = useState("");
     const [ passWord, setPassword ] = useState("");
@@ -10,7 +10,7 @@ const RegistrationForm = (props) => {
     const submitHandler = (e) => {
         e.preventDefault();
         const newUser = { userName, passWord, confirmPassword };
-        onSubmitProp({ userName, passWord, confirmPassword });
+        onSubmitProp(newUser);
         setUser(newUser);
     };
     return (
@@ -21,6 +21,7 @@ const RegistrationForm = (props) => {
                     {errors.map((err, index) => (
                         <p key={index}>{err}</p>
                     ))}
+                    <p>{errMessage}</p>
                 </div>
                 <div>
                     <label htmlFor="userName">Username: </label>

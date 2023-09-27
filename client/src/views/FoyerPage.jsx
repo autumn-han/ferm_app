@@ -9,15 +9,14 @@ const FoyerPage = () => {
     const [ errors, setErrors ] = useState([]);
     const [ errMessage, setErrMessage ] = useState("");
     const navigate = useNavigate();
-    const { user: contextUser, setUser } = useContext(userContext);
+    const { user, setUser } = useContext(userContext);
     const registerUser = (userParam) => {
         axios.post('http://localhost:8000/api/user/register', userParam, { withCredentials: true })
-            .then((newUser) => {
+            .then((res) => {
                 setUser({ 
-                    userName: newUser.userName,
-                    projects: newUser.projects 
+                    userName: res.data.newUser.userName,
+                    projects: res.data.newUser.projects 
                 })
-                console.log(newUser.data);
                 navigate('/dashboard');
             })
             .catch((err) => {
@@ -27,15 +26,16 @@ const FoyerPage = () => {
                 for (const key of Object.keys(errorResponse)) {
                     errorArr.push(errorResponse[key].message)
                 }
+                setErrMessage(err.response.data.msg);
                 setErrors(errorArr);
             });
     };
     const loginUser = (userParam) => {
         axios.post('http://localhost:8000/api/user/login', userParam, { withCredentials: true })
-            .then((user) => {
+            .then((res) => {
                 setUser({ 
-                    userName: user.data.user.userName,
-                    projects: user.data.user.projects 
+                    userName: res.data.user.userName,
+                    projects: res.data.user.projects 
                 })
                 console.log(user);
                 navigate('/dashboard');
@@ -56,7 +56,7 @@ const FoyerPage = () => {
                     <LoginForm errMessage={errMessage} onSubmitProp={loginUser} />
                 </div>
                 <div>
-                    <RegistrationForm errors={errors} onSubmitProp={registerUser} />
+                    <RegistrationForm errMessage={errMessage} errors={errors} onSubmitProp={registerUser} />
                 </div>
             </div>
         </div>
@@ -64,3 +64,8 @@ const FoyerPage = () => {
 };
 
 export default FoyerPage;
+
+// TO-DO:
+// 1. fix error message - there seems to be an issues with the registration POST request error
+// if the username already exists in the database, the error message does not render on the page, so the user doesn't know
+// what they need to do in order to register or login

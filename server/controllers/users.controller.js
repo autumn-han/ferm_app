@@ -27,7 +27,10 @@ module.exports = {
           .status(201)
           // create cookie to store user info on the client side
           .cookie("userToken", userToken, { httpOnly: true, maxAge: 7200000 })
-          .json(newUser);
+          .json({
+            newUser: { userName: newUser.userName, projects: newUser.projects },
+            msg: "Successful registration",
+          });
       }
     } catch (err) {
       res.status(400).json(err);
@@ -91,3 +94,6 @@ module.exports = {
       .catch((err) => res.json(err));
   },
 };
+
+// TO-DO;
+// 1. Might need to map the form data for the update method?

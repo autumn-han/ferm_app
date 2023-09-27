@@ -11,6 +11,7 @@ const UserPage = () => {
     const createProject = (newParam) => {
         axios.patch('http://localhost:8000/api/user/' + user._id, newParam) 
             .then((res) => {
+                // map form data here?
                 console.log("Successfully added project");
                 navigate('/dashboard');
             })
@@ -27,3 +28,7 @@ const UserPage = () => {
 };
 
 export default UserPage;
+
+// TO-DO:
+// 1. add useEffect GET request to show live updates to the user's page after adding a new project under their account
+// 2. pass this in as props for ProjectList?
