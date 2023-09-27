@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const secret = process.env.JWT_SECRET;
 
-// creating a method that checks user authentication
+// checking user authentication
 module.exports = {
   authenticate(req, res, next) {
     jwt.verify(req.cookies.userToken, secret, (err, payload) => {

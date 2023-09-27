@@ -7,7 +7,7 @@ module.exports = {
   // REGISTER USER
   register: async (req, res) => {
     try {
-      // check if user already exists in database, if not, create new user
+      // check if user already exists in database; if not, create new user
       const user = await User.findOne({ userName: req.body.userName });
       if (user) {
         return res
@@ -81,7 +81,7 @@ module.exports = {
       .then((user) => res.json(user))
       .catch((err) => res.json(err));
   },
-  // UPDATE USER
+  // UPDATE USER - map form data here?
   update: (req, res) => {
     User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       .then((updatedUser) => res.json(updatedUser))

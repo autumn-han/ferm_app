@@ -11,7 +11,9 @@ const ProjectForm = (props) => {
     const [ desc, setDesc ] = useState("");
     const submitHandler = (e) => {
         e.preventDefault();
-        onSubmitProp({ title, startDate, endDate, status, desc });
+        onSubmitProp({
+            // how to set embedded attributes to formData? 
+        });
     };
     return (
         <div>
@@ -41,6 +43,10 @@ const ProjectForm = (props) => {
                     <div>
                         <label>Description: </label>
                         <input type='textarea' />
+                    </div>
+                    <div>
+                        {/* <label>Upload Photo: </label>
+                        <input type='file' /> */}
                     </div>
                     <button>Add Brew Project</button>
                 </form>
