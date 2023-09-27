@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { userContext } from '../context/UserContext';
 import LoginForm from '../components/LoginForm';
 import RegistrationForm from '../components/RegistrationForm';
 
@@ -8,9 +9,14 @@ const FoyerPage = () => {
     const [ errors, setErrors ] = useState([]);
     const [ errMessage, setErrMessage ] = useState("");
     const navigate = useNavigate();
+    const { user: contextUser, setUser } = useContext(userContext);
     const registerUser = (userParam) => {
         axios.post('http://localhost:8000/api/user/register', userParam, { withCredentials: true })
             .then((newUser) => {
+                setUser({ 
+                    userName: newUser.userName,
+                    projects: newUser.projects 
+                })
                 console.log(newUser.data);
                 navigate('/dashboard');
             })
@@ -27,13 +33,17 @@ const FoyerPage = () => {
     const loginUser = (userParam) => {
         axios.post('http://localhost:8000/api/user/login', userParam, { withCredentials: true })
             .then((user) => {
-                console.log(user.data);
+                setUser({ 
+                    userName: user.data.user.userName,
+                    projects: user.data.user.projects 
+                })
+                console.log(user);
                 navigate('/dashboard');
             })
             .catch((err) => {
                 console.log("Unable to process POST login request");
                 setErrMessage(err.response.data.msg);
-                console.log(errMessage);
+                console.log(err);
             });
     };
     return (

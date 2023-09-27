@@ -58,7 +58,10 @@ module.exports = {
         res
           .status(200)
           .cookie("userToken", userToken, { httpOnly: true, maxAge: 7200000 })
-          .json({ msg: "Successful login" });
+          .json({
+            user: { userName: user.userName, projects: user.projects },
+            msg: "Successful login",
+          });
       }
     } catch (err) {
       res.status(400).json(err);

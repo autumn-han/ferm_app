@@ -13,7 +13,7 @@ const ProjectList = () => {
                     <h2>What's Brewing...</h2>
                     <table>
                         <tbody>
-                            {}
+                            {user.projects[0].title}
                         </tbody>
                     </table>
                 </div>
