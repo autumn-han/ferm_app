@@ -8,6 +8,16 @@ import ProjectForm from '../components/ProjectForm';
 const UserPage = () => {
     const { user } = useContext(userContext);
     const navigate = useNavigate();
+    const logout = () => {
+        axios.post('http://localhost:8000/api/user/logout', {}, { withCredentials: true })
+            .then((res) => {
+                console.log("Successfully logged user out");
+                navigate('/foyer');
+            })
+            .catch((err) => {
+                console.log("Unable to log user out");
+            });
+    };
     const createProject = (newParam) => {
         axios.patch('http://localhost:8000/api/user/' + user._id, newParam) 
             .then((res) => {
@@ -21,7 +31,7 @@ const UserPage = () => {
     };
     return (
         <div>
-            <ProjectList />
+            <ProjectList onClickProp={logout} />
             <ProjectForm onSubmitProp={createProject} />
         </div>
     )

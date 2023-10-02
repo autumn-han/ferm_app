@@ -20,19 +20,19 @@ const ProjectForm = (props) => {
             <h2>Start a New Project</h2>
                 <form onSubmit={submitHandler}>
                     <div>
-                        <label for="title">Title: </label>
+                        <label htmlFor="title">Title: </label>
                         <input type='text' name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
                     </div>
                     <div>
-                        <label for="startDate">Start-Date: </label>
+                        <label htmlFor="startDate">Start-Date: </label>
                         <input type='date' name="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                     </div>
                     <div>
-                        <label for="endDate">End-Date: </label>
+                        <label htmlFor="endDate">End-Date: </label>
                         <input type='date' name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                     </div>
                     <div>
-                        <label for="status">Status: </label>
+                        <label htmlFor="status">Status: </label>
                         <select name="status" onChange={(e) => setStatus(e.target.value)} >
                             <option value='Primary'>Primary</option>
                             <option value='Secondary'>Secondary</option>
@@ -41,7 +41,7 @@ const ProjectForm = (props) => {
                         </select>
                     </div>
                     <div>
-                        <label for="desc">Description: </label>
+                        <label htmlFor="desc">Description: </label>
                         <input type='textarea' name="desc" value={desc} onChange={(e) => setDesc(e.target.value)} />
                     </div>
                     <div>

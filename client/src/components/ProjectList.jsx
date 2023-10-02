@@ -1,12 +1,18 @@
 import React, { useContext } from 'react';
 import { userContext } from '../context/UserContext';
 
-const ProjectList = () => {
+const ProjectList = (props) => {
     const { user } = useContext(userContext);
+    const { onClickProp } = props;
+    const logoutHandler = (e) => {
+        e.preventDefault();
+        onClickProp();
+    };
     return (
         <div>
             <div>
                 <h1>{`Welcome, ${user.userName}`}</h1>
+                <button onClick={logoutHandler}>Logout</button>
             </div>
             <div>
                 <div>
