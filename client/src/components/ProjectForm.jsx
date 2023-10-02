@@ -4,6 +4,7 @@ import { userContext } from '../context/UserContext';
 const ProjectForm = (props) => {
     const { onSubmitProp } = props;
     const { user } = useContext(userContext);
+    // maybe consider creating const formData and destructuring to include these attributes to save code
     const [ title, setTitle ] = useState("");
     const [ startDate, setStartDate ] = useState("");
     const [ endDate, setEndDate ] = useState("");

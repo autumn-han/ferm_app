@@ -17,17 +17,22 @@ const FoyerPage = () => {
                     userName: res.data.newUser.userName,
                     projects: res.data.newUser.projects 
                 })
+                console.log("Successfully processed POST registration request");
                 navigate('/dashboard');
             })
             .catch((err) => {
                 console.log("Unable to process POST registration request");
-                const errorResponse = err.response.data.errors;
-                const errorArr = [];
-                for (const key of Object.keys(errorResponse)) {
-                    errorArr.push(errorResponse[key].message)
+                if (err.response.data.errors) {
+                    const errorResponse = err.response.data.errors;
+                    const errorArr = [];
+                    for (const key of Object.keys(errorResponse)) {
+                        errorArr.push(errorResponse[key].message)
+                    }
+                    setErrors(errorArr);
                 }
-                setErrMessage(err.response.data.msg);
-                setErrors(errorArr);
+                else {
+                    setErrMessage(err.response.data.msg);
+                };                
             });
     };
     const loginUser = (userParam) => {
@@ -37,7 +42,7 @@ const FoyerPage = () => {
                     userName: res.data.user.userName,
                     projects: res.data.user.projects 
                 })
-                console.log(user);
+                console.log("Successfully processed POST login request");
                 navigate('/dashboard');
             })
             .catch((err) => {
