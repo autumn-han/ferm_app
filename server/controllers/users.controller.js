@@ -28,7 +28,11 @@ module.exports = {
           // create cookie to store user info on the client side
           .cookie("userToken", userToken, { httpOnly: true, maxAge: 7200000 })
           .json({
-            newUser: { userName: newUser.userName, projects: newUser.projects },
+            newUser: {
+              _id: newUser._id,
+              userName: newUser.userName,
+              projects: newUser.projects,
+            },
             msg: "Successful registration",
           });
       }
@@ -62,7 +66,11 @@ module.exports = {
           .status(200)
           .cookie("userToken", userToken, { httpOnly: true, maxAge: 7200000 })
           .json({
-            user: { userName: user.userName, projects: user.projects },
+            user: {
+              _id: user._id,
+              userName: user.userName,
+              projects: user.projects,
+            },
             msg: "Successful login",
           });
       }
@@ -84,16 +92,27 @@ module.exports = {
   // GET ONE USER
   getUser: (req, res) => {
     User.findOne({ _id: req.params.id })
-      .then((user) => res.json(user))
-      .catch((err) => res.json(err));
+      .then((user) => res.status(200).json(user))
+      .catch((err) => res.status(400).json(err));
   },
   // UPDATE USER - map form data here?
   update: (req, res) => {
-    User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-      .then((updatedUser) => res.json(updatedUser))
-      .catch((err) => res.json(err));
+    User.findOneAndUpdate(
+      { _id: req.params.id },
+      { $set: req.body },
+      { new: true }
+    )
+      .then((updatedUser) => res.status(200).json(updatedUser))
+      .catch((err) => res.status(400).json(err));
   },
 };
 
 // TO-DO;
-// 1. Might need to map the form data for the update method?
+// 1. Figure out how to map the form data for the update method
+// 2. Is there a safer way to grab a user's id for path parameters?
+
+// { "projects.title": req.body.title,
+// "projects.startDate": req.body.startDate,
+// "projects.endDate": req.body.endDate,
+// "projects.status": req.body.status,
+// "projects.desc": req.body.desc }

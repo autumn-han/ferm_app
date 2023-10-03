@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
@@ -6,8 +6,23 @@ import ProjectList from '../components/ProjectList';
 import ProjectForm from '../components/ProjectForm';
 
 const UserPage = () => {
-    const { user } = useContext(userContext);
+    const { user, setUser } = useContext(userContext);
     const navigate = useNavigate();
+    useEffect(() => {
+        axios.get('http://localhost:8000/api/user/' + user._id, { withCredentials: true })
+            .then((res) => {
+                setUser({ 
+                    // use spread operator? 
+                    _id: res.data._id, 
+                    userName: res.data.userName, 
+                    projects: res.data.projects 
+                });
+                console.log("Successfully retrieved user's projects");
+            })
+            .catch((err) => {
+                console.log("Unable to retrieve user's projects");
+            });
+    });
     const logout = () => {
         axios.post('http://localhost:8000/api/user/logout', {}, { withCredentials: true })
             .then((res) => {
@@ -19,14 +34,13 @@ const UserPage = () => {
             });
     };
     const createProject = (newParam) => {
-        axios.patch('http://localhost:8000/api/user/' + user._id, newParam) 
+        axios.patch('http://localhost:8000/api/user/' + user._id, newParam, { withCredentials: true }) 
             .then((res) => {
-                // map form data here?
                 console.log("Successfully added project");
                 navigate('/dashboard');
             })
             .catch((err) => {
-                console.log(err);
+                console.log("Unable to create project");
             });
     };
     return (
@@ -40,5 +54,4 @@ const UserPage = () => {
 export default UserPage;
 
 // TO-DO:
-// 1. add useEffect GET request to show live updates to the user's page after adding a new project under their account
-// 2. pass this in as props for ProjectList?
+// 1. fix createProject function so that projects can be appended to the array without overwriting what is already there

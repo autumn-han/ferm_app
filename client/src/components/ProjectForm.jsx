@@ -12,9 +12,7 @@ const ProjectForm = (props) => {
     const [ desc, setDesc ] = useState("");
     const submitHandler = (e) => {
         e.preventDefault();
-        onSubmitProp({
-            // how to set embedded attributes to formData?
-        });
+        onSubmitProp({ projects: [ ...user.projects, { title: title, startDate: startDate, endDate: endDate, status: status, desc: desc }] });
     };
     return (
         <div>
@@ -25,11 +23,11 @@ const ProjectForm = (props) => {
                         <input type='text' name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
                     </div>
                     <div>
-                        <label htmlFor="startDate">Start-Date: </label>
+                        <label htmlFor="startDate">Start Date: </label>
                         <input type='date' name="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                     </div>
                     <div>
-                        <label htmlFor="endDate">End-Date: </label>
+                        <label htmlFor="endDate">End Date: </label>
                         <input type='date' name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                     </div>
                     <div>
@@ -56,3 +54,4 @@ const ProjectForm = (props) => {
 };
 
 export default ProjectForm;
+

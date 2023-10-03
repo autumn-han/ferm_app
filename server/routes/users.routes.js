@@ -5,9 +5,9 @@ module.exports = (app) => {
   app.post("/api/user/register", UserController.register);
   app.post("/api/user/login", UserController.login);
   app.post("/api/user/logout", UserController.logout);
-  app.get("/api/users", authenticate, UserController.getAllUsers);
-  // app.get("/api/user/:id", authenticate, UserController.getUser);
+  app.get("/api/users", UserController.getAllUsers);
+  app.get("/api/user/:id", UserController.getUser);
   app.patch("/api/user/:id", UserController.update);
 };
 
-// note: when testing in Postman, take 'authenticate' out of the getAllUsers request to make it easier
+// note: when testing in Postman, take 'authenticate' out of the getAllUsers request to make test

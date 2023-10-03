@@ -14,6 +14,7 @@ const FoyerPage = () => {
         axios.post('http://localhost:8000/api/user/register', userParam, { withCredentials: true })
             .then((res) => {
                 setUser({ 
+                    _id: res.data.newUser._id,
                     userName: res.data.newUser.userName,
                     projects: res.data.newUser.projects 
                 })
@@ -29,6 +30,7 @@ const FoyerPage = () => {
                         errorArr.push(errorResponse[key].message)
                     }
                     setErrors(errorArr);
+                    setErrMessage(err.response.data.msg);
                 }
                 else {
                     setErrMessage(err.response.data.msg);
@@ -39,6 +41,7 @@ const FoyerPage = () => {
         axios.post('http://localhost:8000/api/user/login', userParam, { withCredentials: true })
             .then((res) => {
                 setUser({ 
+                    _id: res.data.user._id,
                     userName: res.data.user.userName,
                     projects: res.data.user.projects 
                 })
@@ -69,8 +72,3 @@ const FoyerPage = () => {
 };
 
 export default FoyerPage;
-
-// TO-DO:
-// 1. fix error message - there seems to be an issues with the registration POST request error
-// if the username already exists in the database, the error message does not render on the page, so the user doesn't know
-// what they need to do in order to register or login
