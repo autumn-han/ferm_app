@@ -12,7 +12,6 @@ const UserPage = () => {
         axios.get('http://localhost:8000/api/user/' + user._id, { withCredentials: true })
             .then((res) => {
                 setUser({ 
-                    // use spread operator? 
                     _id: res.data._id, 
                     userName: res.data.userName, 
                     projects: res.data.projects 
@@ -54,4 +53,4 @@ const UserPage = () => {
 export default UserPage;
 
 // TO-DO:
-// 1. fix createProject function so that projects can be appended to the array without overwriting what is already there
+

@@ -107,12 +107,7 @@ module.exports = {
   },
 };
 
-// TO-DO;
-// 1. Figure out how to map the form data for the update method
-// 2. Is there a safer way to grab a user's id for path parameters?
+// TO-DO:
 
-// { "projects.title": req.body.title,
-// "projects.startDate": req.body.startDate,
-// "projects.endDate": req.body.endDate,
-// "projects.status": req.body.status,
-// "projects.desc": req.body.desc }
+// QUESTIONS:
+// 1. Is there a safer way to grab a user's id for path parameters?

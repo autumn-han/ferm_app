@@ -48,4 +48,5 @@ const ProjectList = (props) => {
 export default ProjectList;
 
 // TO-DOs:
-// 1. pass in props for user? For the purpose of displaying live updates of any recently added projects
+// 1. build out a project details page / edit form
+// 2. add links for each project title to access their information pages

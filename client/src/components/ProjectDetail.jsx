@@ -1,11 +1,19 @@
-import React from 'react';
-import axios from 'axios';
+import React, { useState, useContext } from 'react';
+import { userContext } from '../context/UserContext';
 
-const ProjectPage = () => {
+const ProjectDetail = (props) => {
+    const { onSubmitProp } = props;
+    const { user } = useContext(userContext);
+    const [ entryDate, setEntryDate ] = useState("");
+    const [ entryText, setEntryText ] = useState("");
+    const submitHandler = (e) => {
+        e.preventDefault();
+        onSubmitProp({});
+    };
     return (
         <div>
             <div>
-                <h1>PROJECT TITLE</h1>
+                <p>PROJECT TITLE HERE</p>
             </div>
             <div>
                 <div>
@@ -18,14 +26,14 @@ const ProjectPage = () => {
                     </div>
                     <div>
                         <h2>Make an Entry</h2>
-                        <form>
+                        <form onSubmit={submitHandler}>
                             <div>
-                                <label>Entry Date:</label>
-                                <input type='date' />
+                                <label htmlFor='entryDate'>Entry Date:</label>
+                                <input type='date' name='entryDate' value={entryDate} onChange={(e) => setEntryDate(e.target.value)} />
                             </div>
                             <div>
-                                <label>Notes:</label>
-                                <input type='textarea' />
+                                <label htmlFor='entryText'>Notes:</label>
+                                <input type='textarea' name='entryText' value={entryText} onChange={(e) => setEntryText(e.target.value)} />
                             </div>
                             <div>
                                 <label>Upload Pictures:</label>
@@ -43,5 +51,4 @@ const ProjectPage = () => {
     );
 };
 
-export default ProjectPage;
-// consider making ProjectPage child comp of UserPage, and UserPage child comp of Login - to carry user information over
+export default ProjectDetail;

@@ -14,6 +14,7 @@ function App() {
               <Route element={<Navigate to='/foyer' />} path='/' />
               <Route element={<FoyerPage />} path='/foyer' />
               <Route element={<UserPage />} path='/dashboard' />
+              <Route element={<ProjectPage />} path='/project-details' />
             </Routes>
         </UserProvider>
       </BrowserRouter>
