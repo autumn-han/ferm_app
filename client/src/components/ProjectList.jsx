@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { userContext } from '../context/UserContext';
+import { Link } from 'react-router-dom';
 
 const ProjectList = (props) => {
     const { user } = useContext(userContext);
@@ -24,6 +25,7 @@ const ProjectList = (props) => {
                                     <th>Status</th>
                                     <th>Start Date</th>
                                     <th>End Date</th>
+                                    <th>Actions</th>
                                 </thead>
                                 <tbody>
                                     {user.projects.map((project, index) => {
@@ -33,6 +35,7 @@ const ProjectList = (props) => {
                                                 <td>{project.status}</td>
                                                 <td>{project.startDate}</td>
                                                 <td>{project.endDate}</td>
+                                                <td><Link to={`/project-details/${project._id}`}><button>Details</button></Link></td>
                                             </tr>
                                         )
                                     })}
@@ -48,5 +51,4 @@ const ProjectList = (props) => {
 export default ProjectList;
 
 // TO-DOs:
-// 1. build out a project details page / edit form
-// 2. add links for each project title to access their information pages
+// 1. add links for each project title to access their information pages

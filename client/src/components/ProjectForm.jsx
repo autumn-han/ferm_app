@@ -19,15 +19,15 @@ const ProjectForm = (props) => {
                 <form onSubmit={submitHandler}>
                     <div>
                         <label htmlFor="title">Title: </label>
-                        <input type='text' name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                        <input type='text' name="title" onChange={(e) => setTitle(e.target.value)} />
                     </div>
                     <div>
                         <label htmlFor="startDate">Start Date: </label>
-                        <input type='date' name="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                        <input type='date' name="startDate" onChange={(e) => setStartDate(e.target.value)} />
                     </div>
                     <div>
                         <label htmlFor="endDate">End Date: </label>
-                        <input type='date' name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                        <input type='date' name="endDate" onChange={(e) => setEndDate(e.target.value)} />
                     </div>
                     <div>
                         <label htmlFor="status">Status: </label>
@@ -40,7 +40,7 @@ const ProjectForm = (props) => {
                     </div>
                     <div>
                         <label htmlFor="desc">Description: </label>
-                        <input type='textarea' name="desc" value={desc} onChange={(e) => setDesc(e.target.value)} />
+                        <input type='textarea' name="desc" onChange={(e) => setDesc(e.target.value)} />
                     </div>
                     <div>
                         {/* <label>Upload Photo: </label>

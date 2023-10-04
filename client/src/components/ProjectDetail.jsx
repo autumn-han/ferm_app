@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { userContext } from '../context/UserContext';
 
 const ProjectDetail = (props) => {
-    const { onSubmitProp } = props;
+    const { onSubmitProp, project } = props;
     const { user } = useContext(userContext);
     const [ entryDate, setEntryDate ] = useState("");
     const [ entryText, setEntryText ] = useState("");
@@ -12,18 +12,11 @@ const ProjectDetail = (props) => {
     };
     return (
         <div>
-            {/* header */}
             <div>
-                <h1>PROJECT TITLE HERE</h1>
+                <h1>{project.title}</h1>
             </div>
             {/* project details */}
-            <div>
-                <p>Project: {projects[i].title}</p>
-                <p>Start Date: {projects[i].startDate}</p>
-                <p>End Date: {projects[i].endDate}</p>
-                <p>Status: {projects[i].status}</p>
-                <p>Description: {projects[i].desc}</p>
-            </div>
+            
             {/* log entry form */}
             <div>                
                 <div>

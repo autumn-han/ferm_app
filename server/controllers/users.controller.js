@@ -95,7 +95,19 @@ module.exports = {
       .then((user) => res.status(200).json(user))
       .catch((err) => res.status(400).json(err));
   },
-  // UPDATE USER - map form data here?
+  // GET ONE PROJECT
+  getProject: (req, res) => {
+    User.findOne({ _id: req.params.userID })
+      .then((user) => {
+        const userProjects = user.projects;
+        const oneProject = userProjects.find(
+          ({ _id }) => _id == req.params.projectID
+        );
+        return res.status(200).json(oneProject);
+      })
+      .catch((err) => res.status(400).json(err));
+  },
+  // UPDATE USER
   update: (req, res) => {
     User.findOneAndUpdate(
       { _id: req.params.id },
@@ -106,8 +118,3 @@ module.exports = {
       .catch((err) => res.status(400).json(err));
   },
 };
-
-// TO-DO:
-
-// QUESTIONS:
-// 1. Is there a safer way to grab a user's id for path parameters?

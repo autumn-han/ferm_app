@@ -36,7 +36,6 @@ const UserPage = () => {
         axios.patch('http://localhost:8000/api/user/' + user._id, newParam, { withCredentials: true }) 
             .then((res) => {
                 console.log("Successfully added project");
-                navigate('/dashboard');
             })
             .catch((err) => {
                 console.log("Unable to create project");
@@ -53,8 +52,8 @@ const UserPage = () => {
 export default UserPage;
 
 // TO-DO:
-// 1. Change ProjectForm so that the form clear after submission
+// 1. change ProjectForm so that the form clear after submission
 
 // QUESTIONS:
 // 1. Consider making a separate edit form for updating project details; otherwise 
-// find a way to implements conditions in the submit prop
+// find a way to implements conditionals in the submit prop
