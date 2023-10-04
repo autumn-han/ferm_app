@@ -13,16 +13,17 @@ const ProjectPage = () => {
         axios.get('http://localhost:8000/api/project/' + user._id + '/' + projectID, { withCredentials: true })
             .then((res) => {
                 setProject({
-                    title: res.data.oneProject.title,
-                    startDate: res.data.oneProject.startDate,
-                    endDate: res.data.oneProject.endDate,
-                    status: res.data.oneProject.status,
-                    desc: res.data.oneProject.desc
+                    title: res.data.title,
+                    startDate: res.data.startDate,
+                    endDate: res.data.endDate,
+                    status: res.data.status,
+                    desc: res.data.desc
                 });
                 console.log("Successfully retrieved user's project");
             })
             .catch((err) => {
                 console.log("Unable to retrieve user's project");
+                console.log(err);
             });
     });
     const createEntry = (entryParam) => {
