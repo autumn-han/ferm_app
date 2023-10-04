@@ -13,17 +13,22 @@ const ProjectDetail = (props) => {
     };
     const submitHandler = (e) => {
         e.preventDefault();
-        onSubmitProp({});
+        onSubmitProp({ projects: [ ...user.projects, { logEntries: [ ...project.logEntries, { entryDate: entryDate, entryText: entryText } ] } ] });
     };
     return (
         <div>
             <div>
-                <h1>{project.title}</h1>
-                <button onClick={logoutHandler}>Logout</button>
+            <button onClick={logoutHandler}>Logout</button>
                 <Link to={'/dashboard'}><button>Back to the Beer Hall</button></Link>
+                <h1>{project.title}</h1>
             </div>
             {/* project details */}
-            
+                <div>
+                    <p>Start Date: {project.startDate}</p>
+                    <p>End Date: {project.endDate}</p>
+                    <p>Status: {project.status}</p>
+                    <p>Description: {project.desc}</p>
+                </div>
             {/* log entry form */}
             <div>                
                 <div>
@@ -50,3 +55,7 @@ const ProjectDetail = (props) => {
 };
 
 export default ProjectDetail;
+
+// TO-DO:
+// 1. map form data to update log entries without overwriting the whole project object
+// 2. display date/time in a different format

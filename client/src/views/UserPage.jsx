@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
@@ -53,7 +53,3 @@ export default UserPage;
 
 // TO-DO:
 // 1. change ProjectForm so that the form clear after submission
-
-// QUESTIONS:
-// 1. Consider making a separate edit form for updating project details; otherwise 
-// find a way to implements conditionals in the submit prop

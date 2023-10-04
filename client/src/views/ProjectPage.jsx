@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
 import ProjectDetail from '../components/ProjectDetail';
-import ProjectForm from '../components/ProjectForm';
 
 const ProjectPage = () => {
     const { user } = useContext(userContext);
@@ -18,7 +17,8 @@ const ProjectPage = () => {
                     startDate: res.data.startDate,
                     endDate: res.data.endDate,
                     status: res.data.status,
-                    desc: res.data.desc
+                    desc: res.data.desc,
+                    logEntries: res.data.logEntries
                 });
                 console.log("Successfully retrieved user's project");
             })
@@ -45,6 +45,7 @@ const ProjectPage = () => {
             })
             .catch((err) => {
                 console.log("Unable to make PATCH request for log entry");
+                console.log(err);
             });
     };
     const editProject = (editParam) => {
@@ -59,7 +60,6 @@ const ProjectPage = () => {
     return (
         <div>
             <ProjectDetail onSubmitProp={createEntry} onClickProp={logout} project={project} />
-            <ProjectForm onSubmitProp={editProject} />
         </div>
     )
 };
