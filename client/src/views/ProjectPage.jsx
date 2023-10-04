@@ -28,12 +28,25 @@ const ProjectPage = () => {
                 console.log("Unable to make PATCH request for log entry");
             });
     };
+    const editProject = (editParam) => {
+        axios.patch('http://localhost:8000/api/user/' + user._id, editParam, { withCredentials: true })
+            .then((res) => {
+                console.log("Successfully edited project details");
+            })
+            .catch((err) => {
+                console.log("Unable to process PATCH request for editing project details");
+            });
+    };
     return (
         <div>
             <ProjectDetail onSubmitProp={createEntry} />
-            <ProjectForm />
+            <ProjectForm onSubmitProp={editProject} />
         </div>
     )
 };
 
 export default ProjectPage;
+
+// QUESTIONS:
+// 1. how do I retrieve a single project from an array to display on a page?
+// 2. how do I append a log entry to the nested array; and how do I make sure it goes to a specific project (i.e. project ids)?

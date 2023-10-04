@@ -53,4 +53,8 @@ const UserPage = () => {
 export default UserPage;
 
 // TO-DO:
+// 1. Change ProjectForm so that the form clear after submission
 
+// QUESTIONS:
+// 1. Consider making a separate edit form for updating project details; otherwise 
+// find a way to implements conditions in the submit prop

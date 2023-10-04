@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { UserProvider } from './context/UserContext';
 import FoyerPage from './views/FoyerPage';
 import UserPage from './views/UserPage';
-// import ProjectPage from './components/ProjectPage';
+import ProjectPage from './views/ProjectPage';
 
 function App() {
   return (
