@@ -1,11 +1,16 @@
 import React, { useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
 
 const ProjectDetail = (props) => {
-    const { onSubmitProp, project } = props;
+    const { onSubmitProp, onClickProp, project } = props;
     const { user } = useContext(userContext);
     const [ entryDate, setEntryDate ] = useState("");
     const [ entryText, setEntryText ] = useState("");
+    const logoutHandler = (e) => {
+        e.preventDefault();
+        onClickProp();
+    };
     const submitHandler = (e) => {
         e.preventDefault();
         onSubmitProp({});
@@ -14,6 +19,8 @@ const ProjectDetail = (props) => {
         <div>
             <div>
                 <h1>{project.title}</h1>
+                <button onClick={logoutHandler}>Logout</button>
+                <Link to={'/dashboard'}><button>Back to the Beer Hall</button></Link>
             </div>
             {/* project details */}
             

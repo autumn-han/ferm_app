@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
 import ProjectDetail from '../components/ProjectDetail';
 import ProjectForm from '../components/ProjectForm';
@@ -9,6 +9,7 @@ const ProjectPage = () => {
     const { user } = useContext(userContext);
     const { projectID } = useParams();
     const [ project, setProject ] = useState({});
+    const navigate = useNavigate();
     useEffect(() => {
         axios.get('http://localhost:8000/api/project/' + user._id + '/' + projectID, { withCredentials: true })
             .then((res) => {
@@ -26,6 +27,17 @@ const ProjectPage = () => {
                 console.log(err);
             });
     });
+    const logout = () => {
+        axios.post('http://localhost:8000/api/user/logout', {}, { withCredentials: true })
+            .then((res) => {
+                console.log("Successfully logged user out");
+                navigate('/foyer');
+            })
+            .catch((err) => {
+                console.log("Unable to log user out");
+                console.log(err);
+            });
+    };
     const createEntry = (entryParam) => {
         axios.patch('http://localhost:8000/api/user/' + user._id, entryParam, { withCredentials: true })
             .then((res) => {
@@ -46,7 +58,7 @@ const ProjectPage = () => {
     };
     return (
         <div>
-            <ProjectDetail onSubmitProp={createEntry} project={project} />
+            <ProjectDetail onSubmitProp={createEntry} onClickProp={logout} project={project} />
             <ProjectForm onSubmitProp={editProject} />
         </div>
     )
@@ -60,7 +72,3 @@ export default ProjectPage;
 // 3. build out a delete log entry feature
 // 4. build out the edit project feature (optional)
 // 5. build out the edit log entry feature (optional)
-
-// QUESTIONS:
-// 1. how do I retrieve a single project from an array to display on a page?
-// 2. how do I append a log entry to the nested array; and how do I make sure it goes to a specific project (i.e. project ids)?
