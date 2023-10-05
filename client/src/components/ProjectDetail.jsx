@@ -31,6 +31,27 @@ const ProjectDetail = (props) => {
                     <p>End Date: {project.endDate}</p>
                     <p>Status: {project.status}</p>
                     <p>Description: {project.desc}</p>
+                    <p>Log Entries</p>
+                    <div>
+                        {project.logEntries.length > 0 &&
+                            <table>
+                                <thead>
+                                    <th>Entry Date</th>
+                                    <th>Notes</th>
+                                </thead>
+                                <tbody>
+                                    {project.logEntries.map((logEntry, index) => {
+                                        return (
+                                            <tr key={index}>
+                                                <td>{logEntry.entryDate}</td>
+                                                <td>{logEntry.entryText}</td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            </table>
+                        }
+                    </div>
                 </div>
             {/* log entry form */}
             <div>                
@@ -60,4 +81,5 @@ const ProjectDetail = (props) => {
 export default ProjectDetail;
 
 // TO-DO:
-// 1. display date/time in a different format
+// 1. display log entries for project
+// 2. display date/time in a different format
