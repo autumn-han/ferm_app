@@ -117,4 +117,15 @@ module.exports = {
       .then((updatedUser) => res.status(200).json(updatedUser))
       .catch((err) => res.status(400).json(err));
   },
+  // ADD LOG ENTRY TO PROJECT
+  addLogEntry: (req, res) => {
+    User.findOneAndUpdate(
+      { _id: req.params.userID },
+      { $push: { "projects.$[el].logEntries": req.body } },
+      { arrayFilters: [{ "el._id": req.params.projectID }] },
+      { new: true }
+    )
+      .then((updatedUser) => res.status(200).json(updatedUser))
+      .catch((err) => res.status(400).json(err));
+  },
 };

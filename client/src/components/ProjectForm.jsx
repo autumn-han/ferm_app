@@ -11,7 +11,13 @@ const ProjectForm = (props) => {
     const [ desc, setDesc ] = useState("");
     const submitHandler = (e) => {
         e.preventDefault();
-        onSubmitProp({ projects: [ ...user.projects, { title: title, startDate: startDate, endDate: endDate, status: status, desc: desc }] });
+        onSubmitProp({ projects: [ ...user.projects, { 
+            title: title, 
+            startDate: startDate, 
+            endDate: endDate, 
+            status: status, 
+            desc: desc 
+        }] });
     };
     return (
         <div>

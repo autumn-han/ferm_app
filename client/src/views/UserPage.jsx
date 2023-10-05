@@ -20,6 +20,7 @@ const UserPage = () => {
             })
             .catch((err) => {
                 console.log("Unable to retrieve user's projects");
+                console.log(err);
             });
     });
     const logout = () => {
@@ -30,15 +31,18 @@ const UserPage = () => {
             })
             .catch((err) => {
                 console.log("Unable to log user out");
+                console.log(err);
             });
     };
     const createProject = (newParam) => {
         axios.patch('http://localhost:8000/api/user/' + user._id, newParam, { withCredentials: true }) 
             .then((res) => {
                 console.log("Successfully added project");
+                console.log(newParam);
             })
             .catch((err) => {
                 console.log("Unable to create project");
+                console.log(err);
             });
     };
     return (

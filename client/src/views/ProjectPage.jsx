@@ -39,12 +39,13 @@ const ProjectPage = () => {
             });
     };
     const createEntry = (entryParam) => {
-        axios.patch('http://localhost:8000/api/user/' + user._id, entryParam, { withCredentials: true })
+        axios.patch('http://localhost:8000/api/addLogEntry/' + user._id + '/' + projectID, entryParam, { withCredentials: true })
             .then((res) => {
                 console.log("Successfully added a log entry");
             })
             .catch((err) => {
                 console.log("Unable to make PATCH request for log entry");
+                console.log(entryParam);
                 console.log(err);
             });
     };
@@ -55,6 +56,7 @@ const ProjectPage = () => {
             })
             .catch((err) => {
                 console.log("Unable to process PATCH request for editing project details");
+                console.log(err);
             });
     };
     return (
@@ -67,8 +69,7 @@ const ProjectPage = () => {
 export default ProjectPage;
 
 // TO-DO:
-// 1. using the stored index value of the project, append log entries to the project
-// 2. build out a delete project feature
-// 3. build out a delete log entry feature
-// 4. build out the edit project feature (optional)
-// 5. build out the edit log entry feature (optional)
+// 1. build out a delete project feature
+// 2. build out a delete log entry feature
+// 3. build out the edit project feature (optional)
+// 4. build out the edit log entry feature (optional)

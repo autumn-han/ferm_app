@@ -13,7 +13,10 @@ const ProjectDetail = (props) => {
     };
     const submitHandler = (e) => {
         e.preventDefault();
-        onSubmitProp({ projects: [ ...user.projects, { logEntries: [ ...project.logEntries, { entryDate: entryDate, entryText: entryText } ] } ] });
+        onSubmitProp({ 
+            entryDate: entryDate, 
+            entryText: entryText 
+        });
     };
     return (
         <div>
@@ -57,5 +60,4 @@ const ProjectDetail = (props) => {
 export default ProjectDetail;
 
 // TO-DO:
-// 1. map form data to update log entries without overwriting the whole project object
-// 2. display date/time in a different format
+// 1. display date/time in a different format

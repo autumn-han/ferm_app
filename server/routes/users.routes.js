@@ -9,6 +9,7 @@ module.exports = (app) => {
   app.get("/api/user/:id", UserController.getUser);
   app.get("/api/project/:userID/:projectID", UserController.getProject);
   app.patch("/api/user/:id", UserController.update);
+  app.patch("/api/addLogEntry/:userID/:projectID", UserController.addLogEntry);
 };
 
 // note: when testing in Postman, take 'authenticate' out of the getAllUsers request to make test
