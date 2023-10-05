@@ -27,7 +27,7 @@ const ProjectPage = () => {
                 console.log("Unable to retrieve user's project");
                 console.log(err);
             });
-    }, []);
+    });
     const logout = () => {
         axios.post('http://localhost:8000/api/user/logout', {}, { withCredentials: true })
             .then((res) => {
