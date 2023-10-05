@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
 
 const ProjectDetail = (props) => {
-    const { onSubmitProp, onClickProp, project } = props;
+    const { onSubmitProp, onClickProp, project, logEntries } = props;
     const { user } = useContext(userContext);
     const [ entryDate, setEntryDate ] = useState("");
     const [ entryText, setEntryText ] = useState("");
@@ -33,21 +33,21 @@ const ProjectDetail = (props) => {
                     <p>Description: {project.desc}</p>
                     <p>Log Entries</p>
                     <div>
-                        {project.logEntries.length > 0 &&
+                        {logEntries.length > 0 &&
                             <table>
                                 <thead>
                                     <th>Entry Date</th>
                                     <th>Notes</th>
                                 </thead>
                                 <tbody>
-                                    {project.logEntries.map((logEntry, index) => {
-                                        return (
+                                    {logEntries.map((logEntry, index) => 
+                                        (
                                             <tr key={index}>
                                                 <td>{logEntry.entryDate}</td>
                                                 <td>{logEntry.entryText}</td>
                                             </tr>
                                         )
-                                    })}
+                                        )}
                                 </tbody>
                             </table>
                         }
@@ -81,5 +81,4 @@ const ProjectDetail = (props) => {
 export default ProjectDetail;
 
 // TO-DO:
-// 1. display log entries for project
-// 2. display date/time in a different format
+// 1. display date/time in a different format

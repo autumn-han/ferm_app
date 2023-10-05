@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
 import ProjectDetail from '../components/ProjectDetail';
 
 const ProjectPage = () => {
     const { user } = useContext(userContext);
     const { projectID } = useParams();
+    const [ logEntries, setLogEntries ] = useState([]);
     const [ project, setProject ] = useState({});
     const navigate = useNavigate();
     useEffect(() => {
@@ -17,16 +18,16 @@ const ProjectPage = () => {
                     startDate: res.data.startDate,
                     endDate: res.data.endDate,
                     status: res.data.status,
-                    desc: res.data.desc,
-                    logEntries: res.data.logEntries
+                    desc: res.data.desc,                    
                 });
+                setLogEntries(res.data.logEntries);
                 console.log("Successfully retrieved user's project");
             })
             .catch((err) => {
                 console.log("Unable to retrieve user's project");
                 console.log(err);
             });
-    });
+    }, []);
     const logout = () => {
         axios.post('http://localhost:8000/api/user/logout', {}, { withCredentials: true })
             .then((res) => {
@@ -45,7 +46,6 @@ const ProjectPage = () => {
             })
             .catch((err) => {
                 console.log("Unable to make PATCH request for log entry");
-                console.log(entryParam);
                 console.log(err);
             });
     };
@@ -61,7 +61,7 @@ const ProjectPage = () => {
     };
     return (
         <div>
-            <ProjectDetail onSubmitProp={createEntry} onClickProp={logout} project={project} />
+            <ProjectDetail onSubmitProp={createEntry} onClickProp={logout} project={project} logEntries={logEntries} />
         </div>
     )
 };
@@ -73,3 +73,4 @@ export default ProjectPage;
 // 2. build out a delete log entry feature
 // 3. build out the edit project feature (optional)
 // 4. build out the edit log entry feature (optional)
+// 5. display updated log entries after adding

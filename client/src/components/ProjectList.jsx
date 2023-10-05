@@ -50,5 +50,3 @@ const ProjectList = (props) => {
 
 export default ProjectList;
 
-// TO-DOs:
-// 1. add links for each project title to access their information pages
