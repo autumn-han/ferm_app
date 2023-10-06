@@ -49,6 +49,17 @@ const ProjectPage = () => {
                 console.log(err);
             });
     };
+    const deleteProject = () => {
+        axios.patch('http://localhost:8000/api/deleteProject/' + user._id + '/' + projectID, { withCredentials: true })
+            .then((res) => {
+                console.log("Successfully removed project from user's account");
+                navigate('/dashboard');
+            })
+            .catch((err) => {
+                console.log("Unable to process PATCH request for removing a project from user's account");
+                console.log(err);
+            });
+    };
     const editProject = (editParam) => {
         axios.patch('http://localhost:8000/api/user/' + user._id, editParam, { withCredentials: true })
             .then((res) => {
@@ -61,7 +72,7 @@ const ProjectPage = () => {
     };
     return (
         <div>
-            <ProjectDetail onSubmitProp={createEntry} onClickProp={logout} project={project} logEntries={logEntries} />
+            <ProjectDetail onSubmitProp={createEntry} logout={logout} deleteProject={deleteProject} project={project} logEntries={logEntries} />
         </div>
     )
 };
@@ -72,5 +83,3 @@ export default ProjectPage;
 // 1. build out a delete project feature
 // 2. build out a delete log entry feature
 // 3. build out the edit project feature (optional)
-// 4. build out the edit log entry feature (optional)
-// 5. display updated log entries after adding

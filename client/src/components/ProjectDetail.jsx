@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
 
 const ProjectDetail = (props) => {
-    const { onSubmitProp, onClickProp, project, logEntries } = props;
+    const { onSubmitProp, logout, deleteProject, project, logEntries } = props;
     const { user } = useContext(userContext);
     const [ entryDate, setEntryDate ] = useState("");
     const [ entryText, setEntryText ] = useState("");
     const logoutHandler = (e) => {
         e.preventDefault();
-        onClickProp();
+        logout();
     };
     const submitHandler = (e) => {
         e.preventDefault();
@@ -18,12 +18,17 @@ const ProjectDetail = (props) => {
             entryText: entryText 
         });
     };
+    const deleteHandler = (e) => {
+        e.preventDefault();
+        deleteProject();
+    };
     return (
         <div>
             <div>
             <button onClick={logoutHandler}>Logout</button>
                 <Link to={'/dashboard'}><button>Back to the Beer Hall</button></Link>
                 <h1>{project.title}</h1>
+                <button onClick={deleteHandler}>Delete Project</button>
             </div>
             {/* project details */}
                 <div>
@@ -81,4 +86,5 @@ const ProjectDetail = (props) => {
 export default ProjectDetail;
 
 // TO-DO:
-// 1. display date/time in a different format
+// 1. add delete project button
+// 2. add delete log entry button
