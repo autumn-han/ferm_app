@@ -13,10 +13,9 @@ const ProjectDetail = (props) => {
     };
     const submitHandler = (e) => {
         e.preventDefault();
-        onSubmitProp({ 
-            entryDate: entryDate, 
-            entryText: entryText 
-        });
+        onSubmitProp({ entryDate, entryText });
+        setEntryDate("");
+        setEntryText("");
     };
     const deleteProjectHandler = (e) => {
         e.preventDefault();
