@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useNavigate, useParams, Link } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
 import ProjectDetail from '../components/ProjectDetail';
 
@@ -60,6 +60,16 @@ const ProjectPage = () => {
                 console.log(err);
             });
     };
+    const deleteLog = (logID) => {
+        axios.patch('http://localhost:8000/api/deleteLogEntry/' + user._id + '/' + projectID + '/' + logID, { withCredentials: true })
+            .then((res) => {
+                console.log("Successfully removed log entry from project");
+            })
+            .catch((err) => {
+                console.log("Unable to process PATCH request for removing a log entry from the project record");
+                console.log(err);
+            });
+    };
     const editProject = (editParam) => {
         axios.patch('http://localhost:8000/api/user/' + user._id, editParam, { withCredentials: true })
             .then((res) => {
@@ -72,7 +82,7 @@ const ProjectPage = () => {
     };
     return (
         <div>
-            <ProjectDetail onSubmitProp={createEntry} logout={logout} deleteProject={deleteProject} project={project} logEntries={logEntries} />
+            <ProjectDetail onSubmitProp={createEntry} logout={logout} deleteProject={deleteProject} deleteLog={deleteLog} project={project} logEntries={logEntries} />
         </div>
     )
 };

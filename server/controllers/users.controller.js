@@ -142,7 +142,8 @@ module.exports = {
   deleteLogEntry: (req, res) => {
     User.findOneAndUpdate(
       { _id: req.params.userID },
-      // write a pull operation here to remove log entry from nested array?
+      { $pull: { "projects.$[elA].logEntries": { _id: req.params.logID } } },
+      { arrayFilters: [{ "elA._id": req.params.projectID }] },
       { new: true }
     )
       .then((updatedUser) => res.status(200).json(updatedUser))

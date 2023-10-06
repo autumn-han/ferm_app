@@ -14,6 +14,10 @@ module.exports = (app) => {
     "/api/deleteProject/:userID/:projectID",
     UserController.deleteProject
   );
+  app.patch(
+    "/api/deleteLogEntry/:userID/:projectID/:logID",
+    UserController.deleteLogEntry
+  );
 };
 
 // note: when testing in Postman, take 'authenticate' out of the getAllUsers request to make test

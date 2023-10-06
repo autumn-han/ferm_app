@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
 
 const ProjectDetail = (props) => {
-    const { onSubmitProp, logout, deleteProject, project, logEntries } = props;
+    const { onSubmitProp, logout, deleteProject, deleteLog, project, logEntries } = props;
     const { user } = useContext(userContext);
     const [ entryDate, setEntryDate ] = useState("");
     const [ entryText, setEntryText ] = useState("");
@@ -18,7 +18,7 @@ const ProjectDetail = (props) => {
             entryText: entryText 
         });
     };
-    const deleteHandler = (e) => {
+    const deleteProjectHandler = (e) => {
         e.preventDefault();
         deleteProject();
     };
@@ -28,7 +28,7 @@ const ProjectDetail = (props) => {
             <button onClick={logoutHandler}>Logout</button>
                 <Link to={'/dashboard'}><button>Back to the Beer Hall</button></Link>
                 <h1>{project.title}</h1>
-                <button onClick={deleteHandler}>Delete Project</button>
+                <button onClick={deleteProjectHandler}>Delete Project</button>
             </div>
             {/* project details */}
                 <div>
@@ -50,6 +50,7 @@ const ProjectDetail = (props) => {
                                             <tr key={index}>
                                                 <td>{logEntry.entryDate}</td>
                                                 <td>{logEntry.entryText}</td>
+                                                <td><button onClick={(e) => deleteLog(logEntry._id)}>Delete Entry</button></td>
                                             </tr>
                                         )
                                         )}
