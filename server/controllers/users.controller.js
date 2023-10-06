@@ -138,8 +138,17 @@ module.exports = {
       .then((updatedUser) => res.status(200).json(updatedUser))
       .catch((err) => res.status(400).json(err));
   },
+  // DROP A LOG ENTRY
+  deleteLogEntry: (req, res) => {
+    User.findOneAndUpdate(
+      { _id: req.params.userID },
+      // write a pull operation here to remove log entry from nested array?
+      { new: true }
+    )
+      .then((updatedUser) => res.status(200).json(updatedUser))
+      .catch((err) => res.status(400).json(err));
+  },
 };
 
 // TO-DO:
-// 1. create a method for deleting a project
-// 2. create a method for deleting a log entry
+// 1. create a method for deleting a log entry

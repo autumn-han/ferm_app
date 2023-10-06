@@ -80,6 +80,5 @@ const ProjectPage = () => {
 export default ProjectPage;
 
 // TO-DO:
-// 1. build out a delete project feature
-// 2. build out a delete log entry feature
+// 1. build out a delete log entry feature
 // 3. build out the edit project feature (optional)
