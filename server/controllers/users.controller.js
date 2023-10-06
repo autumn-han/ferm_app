@@ -107,7 +107,7 @@ module.exports = {
       })
       .catch((err) => res.status(400).json(err));
   },
-  // UPDATE USER
+  // UPDATE USER / ADD PROJECT TO USER
   update: (req, res) => {
     User.findOneAndUpdate(
       { _id: req.params.id },
@@ -122,6 +122,17 @@ module.exports = {
     User.findOneAndUpdate(
       { _id: req.params.userID },
       { $push: { "projects.$[el].logEntries": req.body } },
+      { arrayFilters: [{ "el._id": req.params.projectID }] },
+      { new: true }
+    )
+      .then((updatedUser) => res.status(200).json(updatedUser))
+      .catch((err) => res.status(400).json(err));
+  },
+  // UPDATE PROJECT DETAILS
+  editProject: (req, res) => {
+    User.findOneAndUpdate(
+      { _id: req.params.userID },
+      { $set: { "projects.$[el]": req.body } },
       { arrayFilters: [{ "el._id": req.params.projectID }] },
       { new: true }
     )
@@ -152,4 +163,5 @@ module.exports = {
 };
 
 // TO-DO:
-// 1. create a method for deleting a log entry
+// 1. build out a method for updating a project's details
+// 2. build out a method for updating a log entry

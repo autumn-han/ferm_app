@@ -4,7 +4,7 @@ import { userContext } from '../context/UserContext';
 
 const ProjectDetail = (props) => {
     const { onSubmitProp, logout, deleteProject, deleteLog, project, logEntries } = props;
-    const { user } = useContext(userContext);
+    // const { user } = useContext(userContext); ------ may not need this here
     const [ entryDate, setEntryDate ] = useState("");
     const [ entryText, setEntryText ] = useState("");
     const logoutHandler = (e) => {
@@ -87,5 +87,4 @@ const ProjectDetail = (props) => {
 export default ProjectDetail;
 
 // TO-DO:
-// 1. add delete project button
-// 2. add delete log entry button
+// 1. add update button to project

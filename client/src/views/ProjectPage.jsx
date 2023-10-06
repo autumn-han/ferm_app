@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
 import ProjectDetail from '../components/ProjectDetail';
+import EditProject from '../components/EditProject';
 
 const ProjectPage = () => {
     const { user } = useContext(userContext);
@@ -71,7 +72,7 @@ const ProjectPage = () => {
             });
     };
     const editProject = (editParam) => {
-        axios.patch('http://localhost:8000/api/user/' + user._id, editParam, { withCredentials: true })
+        axios.patch('http://localhost:8000/api/editProject/' + user._id + '/' + projectID, editParam, { withCredentials: true })
             .then((res) => {
                 console.log("Successfully edited project details");
             })
@@ -83,6 +84,7 @@ const ProjectPage = () => {
     return (
         <div>
             <ProjectDetail onSubmitProp={createEntry} logout={logout} deleteProject={deleteProject} deleteLog={deleteLog} project={project} logEntries={logEntries} />
+            <EditProject editProject={editProject} project={project} />
         </div>
     )
 };
@@ -90,5 +92,6 @@ const ProjectPage = () => {
 export default ProjectPage;
 
 // TO-DO:
-// 1. build out a delete log entry feature
-// 3. build out the edit project feature (optional)
+// 1. build out the edit project feature 
+// 2. build out the edit leg entry feature 
+// 3. compartmentalize LogEntryPage from ProjectDetails - maybe a separate component for edit forms as well?

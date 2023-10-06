@@ -10,6 +10,7 @@ module.exports = (app) => {
   app.get("/api/project/:userID/:projectID", UserController.getProject);
   app.patch("/api/user/:id", UserController.update);
   app.patch("/api/addLogEntry/:userID/:projectID", UserController.addLogEntry);
+  app.patch("/api/editProject/:userID/:projectID", UserController.editProject);
   app.patch(
     "/api/deleteProject/:userID/:projectID",
     UserController.deleteProject
@@ -22,6 +23,5 @@ module.exports = (app) => {
 
 // note: when testing in Postman, take 'authenticate' out of the getAllUsers request to make test
 
-// TO-DO:
-// 1. write a route for deleting a project
-// 2. write a route for deleting a log entry
+// TO-DOs:
+// 1. write a route for updating a log entry
