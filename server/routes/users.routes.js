@@ -9,11 +9,16 @@ module.exports = (app) => {
   app.get("/api/user/:id", UserController.getUser);
   app.get("/api/project/:userID/:projectID", UserController.getProject);
   app.patch("/api/user/:id", UserController.update);
+  app.patch("/api/addProject/:id", UserController.addProject);
   app.patch("/api/addLogEntry/:userID/:projectID", UserController.addLogEntry);
   app.patch("/api/editProject/:userID/:projectID", UserController.editProject);
   app.patch(
     "/api/deleteProject/:userID/:projectID",
     UserController.deleteProject
+  );
+  app.patch(
+    "/api/editLogEntry/:userID/:projectID/:logID",
+    UserController.editLogEntry
   );
   app.patch(
     "/api/deleteLogEntry/:userID/:projectID/:logID",

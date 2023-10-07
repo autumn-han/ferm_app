@@ -1,10 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { userContext } from '../context/UserContext';
 
 const ProjectDetail = (props) => {
     const { onSubmitProp, logout, deleteProject, deleteLog, project, logEntries } = props;
-    // const { user } = useContext(userContext); ------ may not need this here
     const [ entryDate, setEntryDate ] = useState("");
     const [ entryText, setEntryText ] = useState("");
     const logoutHandler = (e) => {
@@ -49,7 +47,10 @@ const ProjectDetail = (props) => {
                                             <tr key={index}>
                                                 <td>{logEntry.entryDate}</td>
                                                 <td>{logEntry.entryText}</td>
-                                                <td><button onClick={(e) => deleteLog(logEntry._id)}>Delete Entry</button></td>
+                                                <td>
+                                                    <button onClick={(e) => deleteLog(logEntry._id)}>Delete Entry</button>
+                                                    <button>Edit Entry</button>
+                                                </td>
                                             </tr>
                                         )
                                         )}

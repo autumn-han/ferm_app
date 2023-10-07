@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
 import ProjectDetail from '../components/ProjectDetail';
-import EditProject from '../components/EditProject';
+import ProjectForm from '../components/ProjectForm';
 
 const ProjectPage = () => {
     const { user } = useContext(userContext);
@@ -75,16 +75,32 @@ const ProjectPage = () => {
         axios.patch('http://localhost:8000/api/editProject/' + user._id + '/' + projectID, editParam, { withCredentials: true })
             .then((res) => {
                 console.log("Successfully edited project details");
+                navigate('/dashboard');
             })
             .catch((err) => {
                 console.log("Unable to process PATCH request for editing project details");
                 console.log(err);
             });
     };
+    const editLogEntry = (editParam, logID) => {
+        axios.patch('http://localhost:8000/api/editLogEntry/' + user._id + '/' + projectID + '/' + logID, editParam, { withCredentials: true })
+            .then((res) => {
+                console.log("Successfully edited log entry for the project");
+            })
+            .catch((err) => {
+                console.log("Unable to process PATCH request for editing the log entry for the project");
+                console.log(err);
+            });
+    };
     return (
         <div>
-            <ProjectDetail onSubmitProp={createEntry} logout={logout} deleteProject={deleteProject} deleteLog={deleteLog} project={project} logEntries={logEntries} />
-            <EditProject editProject={editProject} project={project} />
+            <div>
+                <ProjectDetail onSubmitProp={createEntry} logout={logout} deleteProject={deleteProject} deleteLog={deleteLog} project={project} logEntries={logEntries} />
+            </div>
+            <div>
+                <h2>Need to Update The Status Your Project?</h2>
+                <ProjectForm onSubmitProp={editProject} iTitle={project.title} iStart={project.startDate} iEnd={project.endDate} iStatus={project.status} iDesc={project.desc} />
+            </div>
         </div>
     )
 };
@@ -92,6 +108,7 @@ const ProjectPage = () => {
 export default ProjectPage;
 
 // TO-DO:
-// 1. build out the edit project feature 
-// 2. build out the edit leg entry feature 
-// 3. compartmentalize LogEntryPage from ProjectDetails - maybe a separate component for edit forms as well?
+// 1. build out log entry tabs
+// 2. incorporate edit entry feature for each tab
+// 3. fix props for passing in initial values of project properties for ProjectForm
+// 4. compartmentalize LogEntryPage from ProjectDetails - maybe a separate component for edit forms as well?

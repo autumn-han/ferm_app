@@ -107,11 +107,21 @@ module.exports = {
       })
       .catch((err) => res.status(400).json(err));
   },
-  // UPDATE USER / ADD PROJECT TO USER
+  // UPDATE USER
   update: (req, res) => {
     User.findOneAndUpdate(
       { _id: req.params.id },
       { $set: req.body },
+      { new: true }
+    )
+      .then((updatedUser) => res.status(200).json(updatedUser))
+      .catch((err) => res.status(400).json(err));
+  },
+  // ADD PROJECT TO USER
+  addProject: (req, res) => {
+    User.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: { projects: req.body } },
       { new: true }
     )
       .then((updatedUser) => res.status(200).json(updatedUser))
@@ -134,6 +144,22 @@ module.exports = {
       { _id: req.params.userID },
       { $set: { "projects.$[el]": req.body } },
       { arrayFilters: [{ "el._id": req.params.projectID }] },
+      { new: true }
+    )
+      .then((updatedUser) => res.status(200).json(updatedUser))
+      .catch((err) => res.status(400).json(err));
+  },
+  // UPDATE A LOG ENTRY
+  editLogEntry: (req, res) => {
+    User.findOneAndUpdate(
+      { _id: req.params.userID },
+      { $set: { "projects.$[elA].logEntries.$[elB]": req.body } },
+      {
+        arrayFilters: [
+          { "elA._id": req.params.projectID },
+          { "elB._id": req.params.logID },
+        ],
+      },
       { new: true }
     )
       .then((updatedUser) => res.status(200).json(updatedUser))
@@ -163,5 +189,4 @@ module.exports = {
 };
 
 // TO-DO:
-// 1. build out a method for updating a project's details
-// 2. build out a method for updating a log entry
+// 1. build out a method for updating a log entry

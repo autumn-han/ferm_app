@@ -35,7 +35,7 @@ const UserPage = () => {
             });
     };
     const createProject = (newParam) => {
-        axios.patch('http://localhost:8000/api/user/' + user._id, newParam, { withCredentials: true }) 
+        axios.patch('http://localhost:8000/api/addProject/' + user._id, newParam, { withCredentials: true }) 
             .then((res) => {
                 console.log("Successfully added project");
                 console.log(newParam);
@@ -47,13 +47,18 @@ const UserPage = () => {
     };
     return (
         <div>
-            <ProjectList onClickProp={logout} />
-            <ProjectForm onSubmitProp={createProject} />
+            <div>
+                <ProjectList onClickProp={logout} />
+            </div>
+            <div>
+                <h3>Start A New Project</h3>
+                <ProjectForm onSubmitProp={createProject} iTitle="" iStart="" iEnd="" iStatus="" iDesc="" project={{}} />
+            </div>
         </div>
     )
 };
 
 export default UserPage;
 
-// TO-DO:
-// 1. change ProjectForm so that the form clear after submission
+
+
