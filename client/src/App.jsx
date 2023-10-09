@@ -4,6 +4,7 @@ import { UserProvider } from './context/UserContext';
 import FoyerPage from './views/FoyerPage';
 import UserPage from './views/UserPage';
 import ProjectPage from './views/ProjectPage';
+import EditLogPage from './views/EditLogPage';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
               <Route element={<FoyerPage />} path='/foyer' />
               <Route element={<UserPage />} path='/dashboard' />
               <Route element={<ProjectPage />} path='/project-details/:projectID' />
+              <Route element={<EditLogPage />} path='/logEntry/edit/:projectID/:logID' />
             </Routes>
         </UserProvider>
       </BrowserRouter>

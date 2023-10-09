@@ -82,20 +82,10 @@ const ProjectPage = () => {
                 console.log(err);
             });
     };
-    const editLogEntry = (editParam, logID) => {
-        axios.patch('http://localhost:8000/api/editLogEntry/' + user._id + '/' + projectID + '/' + logID, editParam, { withCredentials: true })
-            .then((res) => {
-                console.log("Successfully edited log entry for the project");
-            })
-            .catch((err) => {
-                console.log("Unable to process PATCH request for editing the log entry for the project");
-                console.log(err);
-            });
-    };
     return (
         <div>
             <div>
-                <ProjectDetail onSubmitProp={createEntry} logout={logout} deleteProject={deleteProject} deleteLog={deleteLog} project={project} logEntries={logEntries} />
+                <ProjectDetail onSubmitProp={createEntry} logout={logout} deleteProject={deleteProject} deleteLog={deleteLog} projectID={projectID} project={project} logEntries={logEntries} />
             </div>
             <div>
                 <h2>Need to Update The Status Your Project?</h2>

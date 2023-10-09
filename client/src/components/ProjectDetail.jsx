@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const ProjectDetail = (props) => {
-    const { onSubmitProp, logout, deleteProject, deleteLog, project, logEntries } = props;
+    const { onSubmitProp, logout, deleteProject, deleteLog, projectID, project, logEntries } = props;
     const [ entryDate, setEntryDate ] = useState("");
     const [ entryText, setEntryText ] = useState("");
     const logoutHandler = (e) => {
@@ -49,7 +49,7 @@ const ProjectDetail = (props) => {
                                                 <td>{logEntry.entryText}</td>
                                                 <td>
                                                     <button onClick={(e) => deleteLog(logEntry._id)}>Delete Entry</button>
-                                                    <button>Edit Entry</button>
+                                                    <Link to={`/logEntry/edit/${projectID}/${logEntry._id}`}><button>Edit Entry</button></Link>
                                                 </td>
                                             </tr>
                                         )

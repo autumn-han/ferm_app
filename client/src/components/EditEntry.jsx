@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const EditEntry = (props) => {
     const { onSubmitProp } = props;
+    const [ entryDate, setEntryDate ] = useState("");
+    const [ entryText, setEntryText ] = useState("");
     const submitHandler = (e) => {
         e.preventDefault();
-        onSubmitProp({}, id)
-    }
+        onSubmitProp({ entryDate, entryText });
+    };
     return (
         <div>
+            <h2>Need to Edit Your Log Entry?</h2>
             <form onSubmit={submitHandler}>
                 <div>
                     <label htmlFor='entryDate'>Entry Date</label>
@@ -17,7 +20,7 @@ const EditEntry = (props) => {
                     <label htmlFor='entryText'>Entry Text</label>
                     <input type='text' name='entryText' value={entryText} onChange={(e) => setEntryText(e.target.value)} />
                 </div>
-                <button>Submit</button>
+                <button>Submit Changes</button>
             </form>
         </div>
     );
