@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const cookieParser = require("cookie-parser");
+const multer = require("multer");
+const { GridFSStorage } = require("multer-gridfs-storage");
 
 require("./config/mongoose.config");
 require("dotenv").config();
