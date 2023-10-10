@@ -18,22 +18,22 @@ const ProjectForm = (props) => {
     };
     return (
         <div>
-            <form onSubmit={submitHandler}>
+            <form className="form" onSubmit={submitHandler}>
                 <div>
-                    <label htmlFor="title">Title: </label>
-                    <input type='text' name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                    <label className='form-label' htmlFor="title">Title: </label>
+                    <input className='form-control' type='text' name="title" value={title} onChange={(e) => setTitle(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="startDate">Start Date: </label>
-                    <input type='date' name="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                    <label className='form-label' htmlFor="startDate">Start Date: </label>
+                    <input className='form-control' type='date' name="startDate" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="endDate">End Date: </label>
-                    <input type='date' name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                    <label className='form-label' htmlFor="endDate">End Date: </label>
+                    <input className='form-control' type='date' name="endDate" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="status">Status: </label>
-                    <select name="status" value={status} onChange={(e) => setStatus(e.target.value)} >
+                    <label className='form-label' htmlFor="status">Status: </label>
+                    <select className='form-control' name="status" value={status} onChange={(e) => setStatus(e.target.value)} >
                         <option value='Primary'>Primary</option>
                         <option value='Secondary'>Secondary</option>
                         <option value='Aging'>Aging</option>
@@ -41,10 +41,10 @@ const ProjectForm = (props) => {
                     </select>
                 </div>
                 <div>
-                    <label htmlFor="desc">Description: </label>
-                    <input type='textarea' name="desc" value={desc} onChange={(e) => setDesc(e.target.value)} />
+                    <label className='form-label' htmlFor="desc">Description: </label>
+                    <textarea className='form-control' type='textarea' name="desc" value={desc} onChange={(e) => setDesc(e.target.value)}></textarea>
                 </div>
-                <button>Submit</button>
+                <button className='btn btn-success mt-3'>Submit</button>
             </form>
         </div>
     )

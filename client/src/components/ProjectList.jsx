@@ -12,14 +12,14 @@ const ProjectList = (props) => {
     return (
         <div>
             <div>
-                <h1>{`Welcome, ${user.userName}`}</h1>
-                <button onClick={logoutHandler}>Logout</button>
+                <h1>Welcome to your brew hub, {user.userName}</h1>
+                <button className='btn btn-danger mt-3' onClick={logoutHandler}>Logout</button>
             </div>
-            <div>
+            <div className='mt-5'>
                 <div>
                     <h2>What's Brewing...</h2>                    
                         {user.projects.length > 0 &&
-                            <table>
+                            <table className='table table-striped'>
                                 <thead>
                                     <th>Project</th>
                                     <th>Status</th>
@@ -35,7 +35,7 @@ const ProjectList = (props) => {
                                                 <td>{project.status}</td>
                                                 <td>{project.startDate}</td>
                                                 <td>{project.endDate}</td>
-                                                <td><Link to={`/project-details/${project._id}`}><button>Details</button></Link></td>
+                                                <td><Link to={`/project-details/${project._id}`}><button className='btn btn-warning'>Details</button></Link></td>
                                             </tr>
                                         )
                                     })}

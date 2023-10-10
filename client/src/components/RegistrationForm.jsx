@@ -16,7 +16,7 @@ const RegistrationForm = (props) => {
     return (
         <div>
             <h2>Ready to Start?</h2>
-            <form onSubmit={submitHandler}>
+            <form className='form' onSubmit={submitHandler}>
                 <div>
                     {errors.map((err, index) => (
                         <p key={index}>{err}</p>
@@ -24,18 +24,18 @@ const RegistrationForm = (props) => {
                     <p>{errMessage}</p>
                 </div>
                 <div>
-                    <label htmlFor="userName">Username: </label>
-                    <input type="text" name="userName" value={userName} onChange={(e) => setUsername(e.target.value)} />
+                    <label className='form-label' htmlFor="userName">Username: </label>
+                    <input className='form-control' type="text" name="userName" value={userName} onChange={(e) => setUsername(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="passWord">Password: </label>
-                    <input type="password" name="passWord" value={passWord} onChange={(e) => setPassword(e.target.value)} />
+                    <label className='form-label' htmlFor="passWord">Password: </label>
+                    <input className='form-control' type="password" name="passWord" value={passWord} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor="confirmPassword">Confirm Password: </label>
-                    <input type="password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
+                    <label className='form-label' htmlFor="confirmPassword">Confirm Password: </label>
+                    <input className='form-control' type="password" name="confirmPassword" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                 </div>
-                <button>Register</button>
+                <button className='btn btn-success mt-3'>Register</button>
             </form>
         </div>
     )

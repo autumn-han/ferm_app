@@ -36,7 +36,7 @@ const ProjectDetail = (props) => {
                     <p>Log Entries</p>
                     <div>
                         {logEntries.length > 0 &&
-                            <table>
+                            <table className='table table-striped'>
                                 <thead>
                                     <th>Entry Date</th>
                                     <th>Notes</th>

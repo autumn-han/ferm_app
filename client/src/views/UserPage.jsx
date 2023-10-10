@@ -47,11 +47,11 @@ const UserPage = () => {
             });
     };
     return (
-        <div>
-            <div>
+        <div className='container d-flex m-3'>
+            <div className='mb-5'>
                 <ProjectList onClickProp={logout} />
             </div>
-            <div>
+            <div className='w-50 m-5'>
                 <h3>Start A New Project</h3>
                 <ProjectForm onSubmitProp={createProject} iTitle="" iStart="" iEnd="" iStatus="" iDesc="" project={{}} />
             </div>

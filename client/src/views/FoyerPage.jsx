@@ -55,11 +55,11 @@ const FoyerPage = () => {
             });
     };
     return (
-        <div>
+        <div className='container m-3 d-flex flex-column align-items-center'>
             <div>
                 <h1>Welcome to Fermentation Tracker</h1>
             </div>
-            <div>
+            <div className='d-flex w-100 justify-content-evenly mt-3'>
                 <div>
                     <LoginForm errMessage={errMessage} onSubmitProp={loginUser} />
                 </div>
