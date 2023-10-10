@@ -2,8 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const cookieParser = require("cookie-parser");
-const multer = require("multer");
-const { GridFSStorage } = require("multer-gridfs-storage");
+// const multer = require("multer");
+// const { GridFSStorage } = require("multer-gridfs-storage");
 
 require("./config/mongoose.config");
 require("dotenv").config();
@@ -19,3 +19,6 @@ userRoutes(app);
 app.listen(process.env.DB_PORT, () =>
   console.log("The server is all fired up")
 );
+
+// TO-DO:
+// 1. import the necessary packages to use GridFS

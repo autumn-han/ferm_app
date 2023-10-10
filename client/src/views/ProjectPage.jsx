@@ -8,11 +8,11 @@ import ProjectForm from '../components/ProjectForm';
 const ProjectPage = () => {
     const { user } = useContext(userContext);
     const { projectID } = useParams();
+    const navigate = useNavigate();
     const [ logEntries, setLogEntries ] = useState([]);
     const [ project, setProject ] = useState({});
-    const navigate = useNavigate();
     useEffect(() => {
-        axios.get('http://localhost:8000/api/project/' + user._id + '/' + projectID, { withCredentials: true })
+            axios.get('http://localhost:8000/api/project/' + user._id + '/' + projectID, { withCredentials: true })
             .then((res) => {
                 setProject({
                     title: res.data.title,
@@ -28,7 +28,7 @@ const ProjectPage = () => {
                 console.log("Unable to retrieve user's project");
                 console.log(err);
             });
-    });
+        });
     const logout = () => {
         axios.post('http://localhost:8000/api/user/logout', {}, { withCredentials: true })
             .then((res) => {
@@ -88,7 +88,7 @@ const ProjectPage = () => {
                 <ProjectDetail onSubmitProp={createEntry} logout={logout} deleteProject={deleteProject} deleteLog={deleteLog} projectID={projectID} project={project} logEntries={logEntries} />
             </div>
             <div>
-                <h2>Need to Update The Status Your Project?</h2>
+                <h2>Need to Update The Status of Your Project?</h2>
                 <ProjectForm onSubmitProp={editProject} iTitle={project.title} iStart={project.startDate} iEnd={project.endDate} iStatus={project.status} iDesc={project.desc} />
             </div>
         </div>
@@ -98,7 +98,5 @@ const ProjectPage = () => {
 export default ProjectPage;
 
 // TO-DO:
-// 1. build out log entry tabs
-// 2. incorporate edit entry feature for each tab
-// 3. fix props for passing in initial values of project properties for ProjectForm
-// 4. compartmentalize LogEntryPage from ProjectDetails - maybe a separate component for edit forms as well?
+// 1. fix props for passing in initial values of project properties for ProjectForm
+// 2. add bootstrap

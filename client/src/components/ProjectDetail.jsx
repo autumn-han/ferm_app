@@ -85,6 +85,3 @@ const ProjectDetail = (props) => {
 };
 
 export default ProjectDetail;
-
-// TO-DO:
-// 1. add update button to project

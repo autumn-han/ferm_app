@@ -22,7 +22,7 @@ const EditLogPage = () => {
     };
     return (
         <div>
-            <EditEntry onSubmitProp={editLogEntry} />
+            <EditEntry onSubmitProp={editLogEntry} projectID={projectID} />
         </div>
     );
 };

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const EditEntry = (props) => {
-    const { onSubmitProp } = props;
+    const { onSubmitProp, projectID } = props;
     const [ entryDate, setEntryDate ] = useState("");
     const [ entryText, setEntryText ] = useState("");
     const submitHandler = (e) => {
@@ -10,6 +11,9 @@ const EditEntry = (props) => {
     };
     return (
         <div>
+            <div>
+                <Link to={`/project-details/${projectID}`}><button>Return to Project Page</button></Link>
+            </div>
             <h2>Need to Edit Your Log Entry?</h2>
             <form onSubmit={submitHandler}>
                 <div>

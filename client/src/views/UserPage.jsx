@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { userContext } from '../context/UserContext';
@@ -39,6 +39,7 @@ const UserPage = () => {
             .then((res) => {
                 console.log("Successfully added project");
                 console.log(newParam);
+                navigate('/dashboard');
             })
             .catch((err) => {
                 console.log("Unable to create project");

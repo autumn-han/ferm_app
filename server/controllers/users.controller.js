@@ -187,6 +187,3 @@ module.exports = {
       .catch((err) => res.status(400).json(err));
   },
 };
-
-// TO-DO:
-// 1. build out a method for updating a log entry
