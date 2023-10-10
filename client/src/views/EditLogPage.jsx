@@ -21,7 +21,7 @@ const EditLogPage = () => {
             });
     };
     return (
-        <div>
+        <div className='container'>
             <EditEntry onSubmitProp={editLogEntry} projectID={projectID} />
         </div>
     );

@@ -12,19 +12,19 @@ const EditEntry = (props) => {
     return (
         <div>
             <div>
-                <Link to={`/project-details/${projectID}`}><button>Return to Project Page</button></Link>
+                <Link to={`/project-details/${projectID}`}><button className='btn btn-primary m-3'>Return to Project Page</button></Link>
             </div>
             <h2>Need to Edit Your Log Entry?</h2>
-            <form onSubmit={submitHandler}>
+            <form className='form' onSubmit={submitHandler}>
                 <div>
-                    <label htmlFor='entryDate'>Entry Date</label>
-                    <input type='date' name='entryDate' value={entryDate} onChange={(e) => setEntryDate(e.target.value)} />
+                    <label className='form-label' htmlFor='entryDate'>Entry Date</label>
+                    <input className='form-control' type='date' name='entryDate' value={entryDate} onChange={(e) => setEntryDate(e.target.value)} />
                 </div>
                 <div>
-                    <label htmlFor='entryText'>Entry Text</label>
-                    <input type='text' name='entryText' value={entryText} onChange={(e) => setEntryText(e.target.value)} />
+                    <label className='form-label' htmlFor='entryText'>Entry Text</label>
+                    <textarea className='form-control' name='entryText' value={entryText} onChange={(e) => setEntryText(e.target.value)} />
                 </div>
-                <button>Submit Changes</button>
+                <button className='btn btn-success mt-3'>Submit Changes</button>
             </form>
         </div>
     );
