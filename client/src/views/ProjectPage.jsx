@@ -83,11 +83,11 @@ const ProjectPage = () => {
             });
     };
     return (
-        <div>
-            <div>
+        <div className='d-flex container'>
+            <div className='m-5 w-75 border rounded'>
                 <ProjectDetail onSubmitProp={createEntry} logout={logout} deleteProject={deleteProject} deleteLog={deleteLog} projectID={projectID} project={project} logEntries={logEntries} />
             </div>
-            <div>
+            <div className='m-5 w-50'>
                 <h2>Need to Update The Status of Your Project?</h2>
                 <ProjectForm onSubmitProp={editProject} iTitle={project.title} iStart={project.startDate} iEnd={project.endDate} iStatus={project.status} iDesc={project.desc} />
             </div>
