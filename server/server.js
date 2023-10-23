@@ -1,9 +1,15 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const cookieParser = require("cookie-parser");
-// const multer = require("multer");
-// const { GridFSStorage } = require("multer-gridfs-storage");
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+const methodOverride = require("method-override");
+
+// gridFS middleware
+app.use(bodyParser.json());
+app.use(methodOverride("_method"));
 
 require("./config/mongoose.config");
 require("dotenv").config();
@@ -19,6 +25,3 @@ userRoutes(app);
 app.listen(process.env.DB_PORT, () =>
   console.log("The server is all fired up")
 );
-
-// TO-DO:
-// 1. import the necessary packages to use GridFS

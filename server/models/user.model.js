@@ -40,7 +40,9 @@ const UserSchema = new mongoose.Schema(
             entryText: {
               type: String,
             },
-            // picUpload: GridFS (API)
+            upload: {
+              type: String,
+            },
           },
         ],
       },

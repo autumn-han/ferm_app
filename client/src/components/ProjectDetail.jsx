@@ -63,7 +63,7 @@ const ProjectDetail = (props) => {
             <div className='mt-3'>                
                 <div>
                     <h2>Add a Log Entry</h2>
-                    <form className='form w-50' onSubmit={submitHandler}>
+                    <form className='form w-50' onSubmit={submitHandler} encType='multipart/form-data'>
                         <div>
                             <label className='form-label' htmlFor='entryDate'>Entry Date:</label>
                             <input className='form-control' type='date' name='entryDate' value={entryDate} onChange={(e) => setEntryDate(e.target.value)} />
@@ -73,9 +73,8 @@ const ProjectDetail = (props) => {
                             <textarea className='form-control' name='entryText' value={entryText} onChange={(e) => setEntryText(e.target.value)} />
                         </div>
                         <div>
-                            <label className='form-label'>Upload Pictures:</label>
-                            <input className='form-control' type='file' />
-                            {/* picture upload feature here */}
+                            <label className='form-label' htmlFor='file' >Upload Pictures:</label>
+                            <input className='form-control' type='file' name='file' />
                         </div>
                         <button className='btn btn-success mt-3'>Add Entry</button>
                     </form>

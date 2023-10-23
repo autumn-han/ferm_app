@@ -38,8 +38,3 @@ module.exports = (app) => {
     UserController.deleteLogEntry
   );
 };
-
-// note: when testing in Postman, take 'authenticate' out of the getAllUsers request to make test
-
-// TO-DO:
-// 1. fix authenticate in delete methods for log entries and projects
