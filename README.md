@@ -19,3 +19,4 @@ Project pages will capture information about the fermentation process as well as
 
 # NOTES
 - when testing routes via Postman, remove 'authenticate' parameter to allow server access
+- try pulling GridFS initation strictly into server file

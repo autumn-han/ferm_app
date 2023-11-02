@@ -18,6 +18,7 @@ app.use(cookieParser());
 app.use(cors({ origin: process.env.DB_ORIGIN, credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 // gridFS middleware
 app.use(bodyParser.json());
 app.use(methodOverride("_method"));
