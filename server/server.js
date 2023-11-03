@@ -14,6 +14,8 @@ const path = require("path");
 require("./config/mongoose.config");
 require("dotenv").config();
 
+const gfs = new Grid(process.env.MongoDBURL, mongoose.mongo);
+
 app.use(cookieParser());
 app.use(cors({ origin: process.env.DB_ORIGIN, credentials: true }));
 app.use(express.json());
@@ -23,22 +25,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 
-// create connection
-const conn = mongoose.createConnection(process.env.MongoDBURL);
-
-// initialize gfs
-let gfs;
-
-// initialize stream
-conn.once("open", () => {
-  gfs = Grid(conn.db, mongoose.mongo);
-  gfs.collection("uploads");
-});
-
-// create storage
+// create storage element
 const storage = new GridFsStorage({
-  url: process.env.MongoDBURL,
-  file: (req, file) => {
+  gfs: gfs,
+  url: process.env.DB_ORIGIN,
+  file: (req, file, cb) => {
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
         if (err) {
@@ -47,14 +38,16 @@ const storage = new GridFsStorage({
         const filename = buf.toString("hex") + path.extname(file.originalname);
         const fileInfo = {
           filename: filename,
-          bucket: "uploads",
         };
         resolve(fileInfo);
       });
     });
   },
+  root: "uploads",
 });
-const upload = multer({ storage });
+
+// multer configuration for single file uploads
+let upload = multer({ storage }).single("file");
 
 const userRoutes = require("./routes/users.routes");
 userRoutes(app);

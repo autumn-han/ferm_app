@@ -1,13 +1,10 @@
 const UserController = require("../controllers/users.controller");
 const { authenticate } = require("../config/jwt.config");
-import upload from "../server/server.js";
 
 module.exports = (app) => {
   app.post("/api/user/register", UserController.register);
   app.post("/api/user/login", UserController.login);
   app.post("/api/user/logout", UserController.logout);
-  // posting uploads
-  app.post("/upload");
   app.get("/api/users", authenticate, UserController.getAllUsers);
   app.get("/api/user/:id", authenticate, UserController.getUser);
   app.get(
