@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 
-// create storage element
+// create gridFS storage element
 const storage = new GridFsStorage({
   gfs: gfs,
   url: process.env.DB_ORIGIN,
@@ -51,6 +51,17 @@ let upload = multer({ storage }).single("file");
 
 const userRoutes = require("./routes/users.routes");
 userRoutes(app);
+
+// route for file upload
+app.post("/upload", (req, res) => {
+  upload(req, res, (err) => {
+    if (err) {
+      res.status(200).json({ message: "Unable to process file upload" });
+      return;
+    }
+    res.status(200).json({ message: "Upload successful" });
+  });
+});
 
 app.listen(process.env.DB_PORT, () =>
   console.log("The server is all fired up")
