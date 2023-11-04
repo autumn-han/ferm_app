@@ -11,11 +11,8 @@ Project pages will capture information about the fermentation process as well as
  - fix authenticate for delete methods
 
 # RECENT ACTIVITY
-- added encType attribute to log entry form on ProjectDetail component
-- imported dependencies into server file
-- added 'upload' to User model file (type: String), within logEntries
-- added middleware into server file
-- rearranged server.js file
+- moved infrastructure for gridFS into server.js 
+- built out route for file uploads in server.js
 
 # NOTES
 - when testing routes via Postman, remove 'authenticate' parameter to allow server access
